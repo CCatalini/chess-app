@@ -15,8 +15,8 @@ repositories {
     maven {
         url = uri("https://maven.pkg.github.com/austral-ingsis/chess-ui")
         credentials {
-            username = System.getenv("GITHUB_USER")
-            password = System.getenv("GITHUB_TOKEN")
+            username = project.properties["GITHUB_USER"]!!.toString()
+            password = project.properties["GITHUB_TOKEN"]!!.toString()
         }
     }
 }
