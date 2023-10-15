@@ -1,10 +1,10 @@
-package board
+package engine.board
 
-import piece.Piece
+import engine.piece.Piece
 
 class BoardImpl(private val width: Int,
                 private val height: Int,
-                private val positions: Map<Position, Piece>) : Board{
+                private val positions: Map<Position, Piece>) : Board {
 
     override fun getPieceByPosition(position: Position): Piece? {
         return positions[position]

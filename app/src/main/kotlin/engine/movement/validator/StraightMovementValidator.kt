@@ -1,7 +1,7 @@
-package movement.validator
+package engine.movement.validator
 
 import GameState
-import movement.Movement
+import engine.movement.Movement
 
 //incluir la validacion del sentido
 class StraightMovementValidator : MovementValidator {

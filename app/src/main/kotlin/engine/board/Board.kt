@@ -1,6 +1,7 @@
-package board
+package engine.board
 
-import piece.Piece
+import engine.board.Position
+import engine.piece.Piece
 
 interface Board {
 

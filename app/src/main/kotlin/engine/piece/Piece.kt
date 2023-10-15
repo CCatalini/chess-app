@@ -1,4 +1,4 @@
-package piece
+package engine.piece
 
 interface Piece {
 

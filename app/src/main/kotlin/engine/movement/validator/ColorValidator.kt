@@ -1,10 +1,10 @@
-package movement.validator
+package engine.movement.validator
 
 import GameState
-import movement.Movement
-import piece.Piece
+import engine.movement.Movement
+import engine.piece.Piece
 
-class ColorValidator : MovementValidator  {
+class ColorValidator : MovementValidator {
 
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         val targetPiece: Piece? = getTargetPiece(movement, gameState)

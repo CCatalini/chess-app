@@ -1,6 +1,6 @@
-package movement
+package engine.movement
 
-import board.Position
+import engine.board.Position
 
 data class Movement(val from: Position, val to: Position){
 

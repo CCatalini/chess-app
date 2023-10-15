@@ -1,7 +1,7 @@
-package movement.validator
+package engine.movement.validator
 
 import GameState
-import movement.Movement
+import engine.movement.Movement
 
 class DoublePawnJumpValidator : MovementValidator {
     override fun validate(movement: Movement, gameState: GameState): Boolean {

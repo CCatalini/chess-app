@@ -1,11 +1,8 @@
-package movement.validator
+package engine.movement.validator
 
 import GameState
-import board.Board
-import board.BoardImpl
-import board.Position
-import movement.Movement
-import piece.Piece
+import engine.board.Position
+import engine.movement.Movement
 
 // para ver que el camino esta vacio
 class EmptyPathValidator : MovementValidator {

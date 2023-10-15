@@ -1,6 +1,6 @@
-import board.Board
-import movement.Movement
-import piece.Color
+import engine.board.Board
+import engine.movement.Movement
+import engine.piece.Color
 
 //guarda una lista de tableros que registra todos los movimientos realizados a lo largo del juego
 interface GameState{

@@ -1,8 +1,4 @@
-package piece
-
-import piece.Color
-import piece.Piece
-import piece.PieceType
+package engine.piece
 
 class PieceImpl(private val id: String,
                 private val color: Color,
