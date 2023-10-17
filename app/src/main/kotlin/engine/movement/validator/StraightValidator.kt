@@ -3,8 +3,8 @@ package engine.movement.validator
 import GameState
 import engine.movement.Movement
 
-//incluir la validacion del sentido
-class StraightValidator (private val limit: Int) : Validator {
+//TODO;
+class StraightValidator (private val limit: Int, private val direction: Int) : Validator {
 
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         val fromX = movement.from.row

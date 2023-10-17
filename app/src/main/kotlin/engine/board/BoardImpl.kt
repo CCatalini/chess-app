@@ -1,5 +1,6 @@
 package engine.board
 
+import engine.movement.Movement
 import engine.piece.Piece
 
 class BoardImpl(private val width: Int,
@@ -29,5 +30,13 @@ class BoardImpl(private val width: Int,
 
     override fun getPiecesPositions(): Map<Position, Piece> {
         return piecePositions
+    }
+
+    //todo --> validar el movimiento de la pieza, si es verdadero actualizar, si es falso devolver el mismo tablero
+    override fun update(movement: Movement): Board {
+        val newPiecePositions = piecePositions.toMutableMap()
+        newPiecePositions.remove(movement.from)
+        newPiecePositions[movement.to] = piecePositions[movement.from]!!
+        return BoardImpl(width, height, newPiecePositions)
     }
 }
