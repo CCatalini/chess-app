@@ -5,7 +5,7 @@ import engine.board.Position
 import engine.movement.Movement
 
 // para ver que el camino esta vacio
-class EmptyPathValidator : MovementValidator {
+class EmptyPathValidator : Validator {
 
     override fun validate(movement: Movement, gameState: GameState): Boolean {
 

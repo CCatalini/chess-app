@@ -4,7 +4,7 @@ import GameState
 import engine.movement.Movement
 
 //la del caballo
-class ComposedMovementValidator : MovementValidator {
+class ComposedValidator : Validator {
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         TODO("Not yet implemented")
     }

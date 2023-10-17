@@ -4,7 +4,7 @@ import GameState
 import engine.movement.Movement
 import kotlin.math.abs
 
-class DiagonalMovementValidator : MovementValidator {
+class DiagonalValidator : Validator {
 
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         val fromX = movement.from.row

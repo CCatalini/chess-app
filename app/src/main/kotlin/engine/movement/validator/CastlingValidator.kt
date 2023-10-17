@@ -4,7 +4,7 @@ import GameState
 import engine.movement.Movement
 
 // para el enroque
-class CastlingMovementValidator : MovementValidator {
+class CastlingValidator : Validator {
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         return true
     }

@@ -3,7 +3,7 @@ package engine.movement.validator
 import GameState
 import engine.movement.Movement
 
-class HorizontalMovementValidator: MovementValidator {
+class HorizontalValidator: Validator {
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         val fromX = movement.from.row
         val fromY = movement.from.column

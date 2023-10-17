@@ -1,10 +1,10 @@
 package engine.piece
 
-import engine.movement.validator.MovementValidator
+import engine.movement.validator.Validator
 
 class Knight(private val id: String,
              private val color: Color,
-             private val rules: List<MovementValidator>) : Piece {
+             private val rules: List<Validator>) : Piece {
 
 
     override fun getId(): String {
@@ -19,7 +19,7 @@ class Knight(private val id: String,
         return PieceType.KNIGHT
     }
 
-    override fun getRules(): List<MovementValidator> {
+    override fun getRules(): List<Validator> {
         return rules
     }
 }

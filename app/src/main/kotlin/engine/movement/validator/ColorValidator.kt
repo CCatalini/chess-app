@@ -4,7 +4,7 @@ import GameState
 import engine.movement.Movement
 import engine.piece.Piece
 
-class ColorValidator : MovementValidator {
+class ColorValidator : Validator {
 
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         val targetPiece: Piece? = getTargetPiece(movement, gameState)

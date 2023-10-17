@@ -3,7 +3,7 @@ package engine.movement.validator
 import GameState
 import engine.movement.Movement
 
-class LegalPositionValidator : MovementValidator {
+class LegalPositionValidator : Validator {
 
     override fun validate(movement: Movement, gameState: GameState): Boolean {
 
