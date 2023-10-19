@@ -1,6 +1,6 @@
 package engine.piece
 
-import engine.movement.validator.Validator
+import engine.validator.Validator
 
 class Bishop(private val id: String,
              private val color: Color,

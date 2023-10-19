@@ -1,11 +1,5 @@
 package engine.factory
 
-import engine.movement.validator.ColorValidator
-import engine.movement.validator.StraightValidator
-import engine.piece.Color
-import engine.piece.Pawn
-import engine.piece.Piece
-
 class PieceFactory {
     companion object {
 

@@ -1,9 +1,11 @@
-package engine.movement.validator
+package engine.validator.orientation
 
 import GameState
 import engine.movement.Movement
+import engine.validator.Validator
 
-class DoublePawnJumpValidator : Validator {
+//la del caballo
+class ComposedValidator : Validator {
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         TODO("Not yet implemented")
     }

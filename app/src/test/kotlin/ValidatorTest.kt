@@ -2,9 +2,11 @@ import engine.GameStateImpl
 import engine.board.BoardImpl
 import engine.board.Position
 import engine.movement.Movement
-import engine.movement.validator.*
 import engine.piece.Color
 import engine.piece.Pawn
+import engine.validator.*
+import engine.validator.board.LegalPositionValidator
+import engine.validator.orientation.StraightValidator
 import org.junit.jupiter.api.Test
 
 internal class ValidatorTest {
@@ -15,7 +17,8 @@ internal class ValidatorTest {
         val validator : Validator = AndValidator(
             listOf(
                 StraightValidator(1, 1),
-                LegalPositionValidator()))
+                LegalPositionValidator()
+            ))
 
         val gameState: GameState = GameStateImpl(
             listOf(
@@ -31,7 +34,8 @@ internal class ValidatorTest {
         val validator : Validator = OrValidator(
             listOf(
                 StraightValidator(1, 1),
-                LegalPositionValidator()))
+                LegalPositionValidator()
+            ))
 
         val gameState: GameState = GameStateImpl(
             listOf(

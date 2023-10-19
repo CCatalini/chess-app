@@ -1,4 +1,4 @@
-package engine.movement.validator
+package engine.validator
 
 import GameState
 import engine.movement.Movement

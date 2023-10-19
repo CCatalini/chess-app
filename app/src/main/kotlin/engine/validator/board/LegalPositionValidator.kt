@@ -1,7 +1,8 @@
-package engine.movement.validator
+package engine.validator.board
 
 import GameState
 import engine.movement.Movement
+import engine.validator.Validator
 
 class LegalPositionValidator : Validator {
 

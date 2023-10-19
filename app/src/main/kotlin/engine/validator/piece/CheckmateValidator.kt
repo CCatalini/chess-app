@@ -1,10 +1,11 @@
-package engine.movement.validator
+package engine.validator.piece
 
 import GameState
 import engine.movement.Movement
+import engine.validator.Validator
 
-//la del caballo
-class ComposedValidator : Validator {
+//para ver si un jugador queda en jaquemate
+class CheckmateValidator : Validator {
     override fun validate(movement: Movement, gameState: GameState): Boolean {
         TODO("Not yet implemented")
     }

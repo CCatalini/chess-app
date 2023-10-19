@@ -1,7 +1,8 @@
-package engine.movement.validator
+package engine.validator.piece
 
 import GameState
 import engine.movement.Movement
+import engine.validator.Validator
 
 // para el enroque
 class CastlingValidator : Validator {

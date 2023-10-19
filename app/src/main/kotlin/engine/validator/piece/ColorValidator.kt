@@ -1,8 +1,9 @@
-package engine.movement.validator
+package engine.validator.piece
 
 import GameState
 import engine.movement.Movement
 import engine.piece.Piece
+import engine.validator.Validator
 
 class ColorValidator : Validator {
 

@@ -1,8 +1,9 @@
-package engine.movement.validator
+package engine.validator.obstacle
 
 import GameState
 import engine.board.Position
 import engine.movement.Movement
+import engine.validator.Validator
 
 // para ver que el camino esta vacio
 // TODO implementar empty en cada direccion (diagonal, vertical, horizontal)

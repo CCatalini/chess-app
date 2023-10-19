@@ -1,7 +1,8 @@
-package engine.movement.validator
+package engine.validator.orientation
 
 import GameState
 import engine.movement.Movement
+import engine.validator.Validator
 import kotlin.math.abs
 
 class DiagonalValidator : Validator {
