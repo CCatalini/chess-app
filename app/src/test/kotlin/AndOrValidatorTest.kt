@@ -9,7 +9,7 @@ import engine.validator.board.LegalPositionValidator
 import engine.validator.orientation.StraightValidator
 import org.junit.jupiter.api.Test
 
-internal class ValidatorTest {
+internal class AndOrValidatorTest {
 
     //test de santi para que vea como funciona el andValidator para los validadores
     @Test

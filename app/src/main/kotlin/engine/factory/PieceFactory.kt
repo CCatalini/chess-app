@@ -1,19 +1,13 @@
 package engine.factory
 
-class PieceFactory {
-    companion object {
+import engine.piece.PieceType
 
-        private var id = '0'
-/*
-        fun createPawn (color: Color) : Piece {
-            val rules = listOf(
-                StraightValidator(1),
-                ColorValidator()
-            )
+// el pieceType es un enum con los nombres de las piezas
+// el pieceFactory se va a encargar de crear las piezas nombre - inicializador
+// PieceInitializer --> interfaz, las implementaciones van a tener las reglas de cada pieza con los And - Or validators
+class PieceFactory (  private val pieces: Map< PieceType, PieceInitializer>){
 
-            return Pawn("" + id++, color, rules )
-        }
 
- */
-    }
 }
+
+
