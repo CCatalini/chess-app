@@ -1,10 +1,9 @@
-import engine.GameStateImpl
-import engine.board.BoardImpl
-import engine.board.Position
-import engine.movement.Movement
-import engine.validator.obstacle.StraightEmptyPathValidator
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import edu.austral.dissis.chess.GameState
+import edu.austral.dissis.chess.GameStateImpl
+import edu.austral.dissis.chess.board.BoardImpl
+import edu.austral.dissis.chess.board.Position
+import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.chess.validator.obstacle.StraightEmptyPathValidator
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

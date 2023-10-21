@@ -1,12 +1,13 @@
-import engine.GameStateImpl
-import engine.board.BoardImpl
-import engine.board.Position
-import engine.movement.Movement
-import engine.piece.Color
-import engine.piece.Pawn
-import engine.validator.*
-import engine.validator.board.LegalPositionValidator
-import engine.validator.orientation.StraightValidator
+import edu.austral.dissis.chess.GameState
+import edu.austral.dissis.chess.GameStateImpl
+import edu.austral.dissis.chess.validator.OrValidator
+import edu.austral.dissis.chess.validator.Validator
+import edu.austral.dissis.chess.board.BoardImpl
+import edu.austral.dissis.chess.board.Position
+import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.chess.validator.AndValidator
+import edu.austral.dissis.chess.validator.board.LegalPositionValidator
+import edu.austral.dissis.chess.validator.direction.StraightValidator
 import org.junit.jupiter.api.Test
 
 internal class AndOrValidatorTest {
@@ -16,7 +17,7 @@ internal class AndOrValidatorTest {
     fun testAndValidator() {
         val validator : Validator = AndValidator(
             listOf(
-                StraightValidator(1, 1),
+                StraightValidator(1),
                 LegalPositionValidator()
             ))
 
@@ -33,7 +34,7 @@ internal class AndOrValidatorTest {
     fun testOrValidator() {
         val validator : Validator = OrValidator(
             listOf(
-                StraightValidator(1, 1),
+                StraightValidator( 1),
                 LegalPositionValidator()
             ))
 
@@ -48,13 +49,13 @@ internal class AndOrValidatorTest {
 
 
 
-
+/*
     @Test
     fun cositas(){
         val gameState: GameState = GameStateImpl(
             listOf(
                 BoardImpl(8, 8, mapOf(
-                    Position(0, 0) to Pawn("1", Color.BLACK, listOf())
+                    Position(0, 0)
                 ))
             )
         )
@@ -62,6 +63,8 @@ internal class AndOrValidatorTest {
         println(gameState.getCurrentBoard().getPieceByPosition(Position(0,0))!!.getId())
 
     }
+
+ */
 
 
 
