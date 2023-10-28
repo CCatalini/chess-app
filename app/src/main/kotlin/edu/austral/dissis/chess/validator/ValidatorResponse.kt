@@ -4,9 +4,9 @@ package edu.austral.dissis.chess.validator
  * sirve para ver el motivo de falla */
 sealed interface ValidatorResponse {
 
-    data class MovementResultValid(val message: String) : ValidatorResponse
+    data class ValidatorResultValid(val message: String) : ValidatorResponse
 
-    data class MovementResultInvalid(val message: String) : ValidatorResponse
+    data class ValidatorResultInvalid(val message: String) : ValidatorResponse
 
 
 }

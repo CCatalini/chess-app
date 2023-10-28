@@ -5,11 +5,8 @@ import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.Validator
 import edu.austral.dissis.chess.validator.ValidatorResponse
 
+/** Clase para verificar que el movimiento de una pieza es recto. */
 class StraightValidator () : Validator {
-
-    private val validResult = ValidatorResponse.MovementResultValid("Movimiento válido.")
-    private val invalidResult = ValidatorResponse.MovementResultInvalid("No es un movimiento recto.")
-
 
     override fun validate(movement: Movement, gameState: GameState): ValidatorResponse {
         val fromX = movement.from.row
@@ -24,8 +21,8 @@ class StraightValidator () : Validator {
         val deltaX = toX - fromX
         val deltaY = toY - fromY
 
-        return  if (deltaX != 0 && deltaY == 0) validResult
-                else invalidResult
+        return  if (deltaX != 0 && deltaY == 0) ValidatorResponse.ValidatorResultValid("OK")
+                else ValidatorResponse.ValidatorResultInvalid("No es un movimiento recto.")
     }
 
 }

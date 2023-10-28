@@ -17,7 +17,7 @@ internal class AndOrValidatorTest {
     fun testAndValidator() {
         val validator : Validator = AndValidator(
             listOf(
-                StraightValidator(1),
+                StraightValidator(),
                 LegalPositionValidator()
             ))
 
@@ -34,7 +34,7 @@ internal class AndOrValidatorTest {
     fun testOrValidator() {
         val validator : Validator = OrValidator(
             listOf(
-                StraightValidator( 1),
+                StraightValidator( ),
                 LegalPositionValidator()
             ))
 

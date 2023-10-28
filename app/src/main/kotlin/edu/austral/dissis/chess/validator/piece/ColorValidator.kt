@@ -4,24 +4,25 @@ import edu.austral.dissis.chess.GameState
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Piece
 import edu.austral.dissis.chess.validator.Validator
+import edu.austral.dissis.chess.validator.ValidatorResponse
 
+/** Para checkear el turno del jugador. Deb*/
 class ColorValidator : Validator {
 
-    override fun validate(movement: Movement, gameState: GameState): Boolean {
-        val targetPiece: Piece? = getTargetPiece(movement, gameState)
+    override fun validate(movement: Movement, gameState: GameState): ValidatorResponse {
+        val pieceToMove: Piece? = getPiece(movement, gameState)
 
-        if (targetPiece != null) {
-            if (targetPiece.getColor() == gameState.getCurrentTurn()) {
-                return true
+        if (pieceToMove != null) {
+            if (pieceToMove.getColor() == gameState.getCurrentTurn()) {
+                return ValidatorResponse.ValidatorResultValid("Es tu turno")
             }
         }
-        return false
+        return ValidatorResponse.ValidatorResultInvalid("No es tu turno capo")
     }
 
-    private fun getTargetPiece (movement: Movement, gameState: GameState): Piece? {
+    private fun getPiece (movement: Movement, gameState: GameState): Piece? {
         return gameState.getCurrentBoard().getPieceByPosition(movement.to)
     }
-
 
 
 }
