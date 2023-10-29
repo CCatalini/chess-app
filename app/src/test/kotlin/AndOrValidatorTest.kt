@@ -2,7 +2,7 @@ import edu.austral.dissis.chess.GameState
 import edu.austral.dissis.chess.GameStateImpl
 import edu.austral.dissis.chess.validator.OrValidator
 import edu.austral.dissis.chess.validator.Validator
-import edu.austral.dissis.chess.board.BoardImpl
+import edu.austral.dissis.chess.board.Board
 import edu.austral.dissis.chess.board.Position
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.AndValidator
@@ -23,7 +23,7 @@ internal class AndOrValidatorTest {
 
         val gameState: GameState = GameStateImpl(
             listOf(
-                BoardImpl(8,8, mapOf()) ))
+                Board(8,8, mapOf()) ))
 
         val movement : Movement = Movement( Position(0,0), Position(9,0) )
 
@@ -40,7 +40,7 @@ internal class AndOrValidatorTest {
 
         val gameState: GameState = GameStateImpl(
             listOf(
-                BoardImpl(8,8, mapOf()) ))
+                Board(8,8, mapOf()) ))
 
         val movement : Movement = Movement( Position(0,0), Position(9,0) )
 

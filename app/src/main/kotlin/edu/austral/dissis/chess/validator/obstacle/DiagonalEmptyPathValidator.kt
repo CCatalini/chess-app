@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.validator.obstacle
 
 import edu.austral.dissis.chess.GameState
-import edu.austral.dissis.chess.board.BoardImpl
+import edu.austral.dissis.chess.board.Board
 import edu.austral.dissis.chess.board.Position
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.Validator
@@ -10,7 +10,7 @@ import edu.austral.dissis.chess.validator.ValidatorResponse
 class DiagonalEmptyPathValidator : Validator {
 
     override fun validate(movement: Movement, gameState: GameState): ValidatorResponse {
-        val positions: BoardImpl = gameState.getCurrentBoard() as BoardImpl
+        val positions: Board = gameState.getCurrentBoard() as Board
 
         val fromX = movement.from.row
         val fromY = movement.from.column

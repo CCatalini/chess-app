@@ -1,6 +1,6 @@
 import edu.austral.dissis.chess.GameState
 import edu.austral.dissis.chess.GameStateImpl
-import edu.austral.dissis.chess.board.BoardImpl
+import edu.austral.dissis.chess.board.Board
 import edu.austral.dissis.chess.board.Position
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.obstacle.StraightEmptyPathValidator
@@ -11,7 +11,7 @@ internal class ObstacleValidatorTest {
 
     @Test
     fun testValidateEmptyPath() {
-        val emptyBoard = BoardImpl(8, 8, emptyMap())
+        val emptyBoard = Board(8, 8, emptyMap())
         val validator = StraightEmptyPathValidator()
         val gameState: GameState = GameStateImpl( listOf( emptyBoard ))
 
