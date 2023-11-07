@@ -18,7 +18,6 @@ class RookInitializer : PieceInitializer {
         return Piece(uuid,
             color,
             PieceType.ROOK,
-            1, /*TODO VER !!!!!!! */
             AndValidator(
                 listOf(
                      LegalPositionValidator(),
