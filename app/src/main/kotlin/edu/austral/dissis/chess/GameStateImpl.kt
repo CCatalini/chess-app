@@ -6,8 +6,6 @@ import edu.austral.dissis.chess.piece.Color
 
 class GameStateImpl(private val boards : List<IBoard>) : GameState {
 
-
-
     override fun getBoards(): List<IBoard> {
         return boards
     }
