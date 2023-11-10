@@ -9,6 +9,7 @@ import edu.austral.dissis.chess.validator.board.LimitedMovementValidator
 import edu.austral.dissis.chess.validator.direction.DiagonalValidator
 import edu.austral.dissis.chess.validator.direction.StraightValidator
 import edu.austral.dissis.chess.validator.obstacle.StraightEmptyPathValidator
+import edu.austral.dissis.chess.validator.piece.IsEnemyValidator
 
 class PawnInitializer :  PieceInitializer{
 

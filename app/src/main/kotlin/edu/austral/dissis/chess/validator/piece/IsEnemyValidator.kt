@@ -1,7 +1,9 @@
-package edu.austral.dissis.chess.validator
+package edu.austral.dissis.chess.validator.piece
 
 import edu.austral.dissis.chess.GameState
 import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.chess.validator.Validator
+import edu.austral.dissis.chess.validator.ValidatorResponse
 
 class IsEnemyValidator : Validator {
 

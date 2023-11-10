@@ -1,7 +1,7 @@
 plugins {
     java
     application
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.9.0"
     id("org.openjfx.javafxplugin").version("0.0.13")
 
 }
@@ -24,9 +24,11 @@ repositories {
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("edu.austral.dissis.chess:chess-ui:1.0.0")
+    implementation("edu.austral.dissis.chess:chess-ui:2.0.1")
+    implementation("edu.austral.dissis.chess:simple-client-server:1.2.0")
     testImplementation("junit:junit:4.13.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    implementation ("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.3")
 }
 
 javafx {

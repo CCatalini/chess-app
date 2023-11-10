@@ -12,4 +12,5 @@ interface IBoard {
     fun getPositionByPiece(piece: Piece): Position?
     fun getPiecesPositions(): Map<Position, Piece>
     fun update(movement: Movement): Any
+    fun getOccupiedPositions(): List<Position>
 }

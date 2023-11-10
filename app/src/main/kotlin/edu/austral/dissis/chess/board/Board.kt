@@ -47,4 +47,8 @@ class Board(private val width: Int,
         newPiecePositions[movement.to] = piecePositions[movement.from]!!
         return Board(width, height, newPiecePositions)
     }
+
+    override fun getOccupiedPositions(): List<Position> {
+        return piecePositions.keys.toList()
+    }
 }
