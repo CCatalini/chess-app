@@ -7,13 +7,6 @@ class Board(private val width: Int,
             private val height: Int,
             private val piecePositions: Map<Position, Piece> ) : IBoard {
 
-    fun movePiece(from: Position, to: Position): Board {
-        val piece: Piece = this.piecePositions[from]?: throw NoSuchElementException("No piece at $from")
-
-        return Board(width, height, piecePositions +
-                                                Pair(to, piece.copy(moveCounter = piece.getMoveCounter() + 1,
-                                                                    id = piece.getId()) ) - from)
-    }
 
     override fun getWidth(): Int {
         return width
