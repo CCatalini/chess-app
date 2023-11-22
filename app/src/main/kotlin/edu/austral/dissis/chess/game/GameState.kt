@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.game
 
-import edu.austral.dissis.chess.board.IBoard
+import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
 import edu.austral.dissis.common.ITurnValidator

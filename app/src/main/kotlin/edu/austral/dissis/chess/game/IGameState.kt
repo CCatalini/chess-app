@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.game
 
-import edu.austral.dissis.chess.board.IBoard
+import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
 import edu.austral.dissis.common.ITurnValidator
@@ -16,7 +16,7 @@ import edu.austral.dissis.common.validator.WinCondition
 5 valido las win conditions y si gana le devuelvo un finished game, sino el devuelvo un current game
 6 (si no son validos los mivmientos) retorno que no es un valid move
  */
-interface IGameState{
+sealed interface IGameState{
 
     fun getBoards(): List<IBoard>
     fun getCurrentBoard(): IBoard

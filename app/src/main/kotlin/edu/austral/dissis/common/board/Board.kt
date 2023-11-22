@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.board
+package edu.austral.dissis.common.board
 
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Piece
@@ -43,5 +43,9 @@ class Board(private val width: Int,
 
     override fun getOccupiedPositions(): List<Position> {
         return piecePositions.keys.toList()
+    }
+
+    override fun getPieces(): List<Piece> {
+        return piecePositions.values.toList()
     }
 }

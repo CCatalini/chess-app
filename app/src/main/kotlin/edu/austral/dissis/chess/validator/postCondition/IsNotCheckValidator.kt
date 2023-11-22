@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.validator.postCondition
 
 import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.chess.game.GameState
-import edu.austral.dissis.chess.board.IBoard
+import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse

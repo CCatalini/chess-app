@@ -33,7 +33,7 @@ class ChessTurnValidator(private val current: Color) : ITurnValidator {
     }
 
     private fun getPiece (movement: Movement, gameState: IGameState): Piece? {
-        return gameState.getCurrentBoard().getPieceByPosition(movement.to)
+        return gameState.getCurrentBoard().getPieceByPosition(movement.from)
     }
 
 

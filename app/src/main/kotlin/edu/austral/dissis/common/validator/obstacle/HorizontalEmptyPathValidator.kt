@@ -1,8 +1,8 @@
 package edu.austral.dissis.common.validator.obstacle
 
 import edu.austral.dissis.chess.game.IGameState
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.board.Position
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.movement.Movement
 
 /** Para validar que el camino horizontal esta vacio */

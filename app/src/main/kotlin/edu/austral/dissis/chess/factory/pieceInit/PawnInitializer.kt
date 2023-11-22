@@ -40,7 +40,7 @@ class PawnInitializer : PieceInitializer {
                             AndValidator(
                                 listOf( // para el primer movimiento
                                     IsFirstMoveValidator(),
-                                    StraightValidator(),
+                                    StraightValidator(), //TODO -> Pasarle el sentido
                                     StraightEmptyPathValidator(),
                                     LimitedMovementValidator(2)
 
@@ -55,7 +55,6 @@ class PawnInitializer : PieceInitializer {
                                 )
                             )
 
-                            //TODO PromotionValidator()
 
 
                         )

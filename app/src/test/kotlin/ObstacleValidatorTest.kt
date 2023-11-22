@@ -1,7 +1,7 @@
 import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.chess.game.GameState
-import edu.austral.dissis.chess.board.Board
-import edu.austral.dissis.chess.board.Position
+import edu.austral.dissis.common.board.Board
+import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.obstacle.StraightEmptyPathValidator
 import org.junit.jupiter.api.Test

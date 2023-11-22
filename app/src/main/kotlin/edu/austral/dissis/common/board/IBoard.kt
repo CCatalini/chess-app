@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.board
+package edu.austral.dissis.common.board
 
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
@@ -15,5 +15,6 @@ interface IBoard {
     fun update(movement: Movement): IBoard
     fun getOccupiedPositions(): List<Position>
 
+    fun getPieces(): List<Piece>
 
 }

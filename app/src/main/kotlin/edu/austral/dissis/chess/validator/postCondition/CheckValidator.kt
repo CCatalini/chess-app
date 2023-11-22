@@ -1,8 +1,8 @@
 package edu.austral.dissis.chess.validator.postCondition
 
 import edu.austral.dissis.chess.game.IGameState
-import edu.austral.dissis.chess.board.IBoard
-import edu.austral.dissis.chess.board.Position
+import edu.austral.dissis.common.board.IBoard
+import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
 import edu.austral.dissis.chess.piece.Piece
@@ -17,7 +17,7 @@ class CheckValidator {
 
         val kingColor: Color = gameState.getCurrentTurn()
         val actualBoard: IBoard = gameState.getCurrentBoard()
-        val kingPosition: Position= getKingPosition(actualBoard, kingColor)?: throw NoSuchElementException("No esta el rey capo")
+        val kingPosition: Position = getKingPosition(actualBoard, kingColor)?: throw NoSuchElementException("No esta el rey capo")
         val enemyCoordinates: List<Position> = actualBoard.getOccupiedPositions()
 
         for(position in enemyCoordinates) {
