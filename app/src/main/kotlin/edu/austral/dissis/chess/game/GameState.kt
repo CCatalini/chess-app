@@ -3,6 +3,8 @@ package edu.austral.dissis.chess.game
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
+import edu.austral.dissis.chess.validator.postCondition.PostConditionResult
+import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
 import edu.austral.dissis.common.ITurnValidator
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
@@ -12,7 +14,7 @@ class GameState(private val boards : List<IBoard>,
                 private val winCondition: WinCondition,
                 private val turnManager: ITurnValidator,
                 private val preConditions: List<Validator>,
-                private val postConditions: List<Validator>) : IGameState {
+                private val postConditions: List<PostConditionValidator>) : IGameState {
 
     override fun getBoards(): List<IBoard> {
         return boards
@@ -54,19 +56,14 @@ class GameState(private val boards : List<IBoard>,
                                         pieceMoveResponse.message)
         }
         //valida las postCondiciones
-        val postConditionResponse : ValidatorResponse = validatePostConditions(movement)
-        if (postConditionResponse is ValidatorResponse.ValidatorResultInvalid) {
-            return InvalidMoveGameState(this.getBoards(),
-                                        this.getWinCondition(),
-                                        this.getTurnManager(),
-                                        this.getListPreConditions(),
-                                        this.getListPostConditions(),
-                                        postConditionResponse.message)
-        }
+        val boardAux: IBoard = this.getCurrentBoard().update(movement)
 
-        val boardAux : IBoard = this.getCurrentBoard().update(movement)
+        val postConditionResponse : PostConditionResult = validatePostConditions(boardAux)
+        val boardAfterPostConditions = if( postConditionResponse is PostConditionResult.ResultValid) postConditionResponse.board else boardAux
+
         val gameAuxBoards = this.getBoards().toMutableList()
-        gameAuxBoards.add(boardAux)
+        gameAuxBoards.add(boardAfterPostConditions)
+
         val gameAux = GameState(gameAuxBoards,
                                     this.getWinCondition(),
                                     this.getTurnManager(),
@@ -98,7 +95,7 @@ class GameState(private val boards : List<IBoard>,
         return preConditions
     }
 
-    override fun getListPostConditions(): List<Validator> {
+    override fun getListPostConditions(): List<PostConditionValidator> {
         return postConditions
     }
 
@@ -125,14 +122,15 @@ class GameState(private val boards : List<IBoard>,
         return piece.validateMove(movement, this)
     }
 
-    private fun validatePostConditions(movement: Movement): ValidatorResponse {
+    private fun validatePostConditions( board : IBoard): PostConditionResult {
+        var boardAux : IBoard = board
         for (postCondition in getListPostConditions()){
-            when (val postConditionResponse : ValidatorResponse = postCondition.validate(movement, this)) {
-                is ValidatorResponse.ValidatorResultInvalid -> return postConditionResponse
-                is ValidatorResponse.ValidatorResultValid -> continue
+            when (val postConditionResponse : PostConditionResult = postCondition.validate( this, boardAux)) {
+                is PostConditionResult.ResultValid -> boardAux = postConditionResponse.board
+                is PostConditionResult.ResultInvalid -> continue
             }
         }
-        return ValidatorResponse.ValidatorResultValid("Se cumplen todas las postcondiciones")
+        return PostConditionResult.ResultValid(boardAux)
     }
 
 }

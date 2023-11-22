@@ -11,12 +11,18 @@ import edu.austral.dissis.common.validator.board.LimitedMovementValidator
 import edu.austral.dissis.common.validator.direction.DiagonalValidator
 import edu.austral.dissis.common.validator.direction.HorizontalValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
+import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
+import edu.austral.dissis.common.validator.piece.IsEnemyValidator
 
 class KingInitializer : PieceInitializer {
 
     override fun initialize(color: Color): Piece {
         val uuid = java.util.UUID.randomUUID().toString()
-        return Piece(uuid,
+        return initialize(color, uuid)
+    }
+
+    override fun initialize(color: Color, id: String): Piece {
+        return Piece(id,
             color,
             PieceType.KING,
             AndValidator(
@@ -24,23 +30,24 @@ class KingInitializer : PieceInitializer {
                     LegalPositionValidator(),
                     OrValidator(
                         listOf(
-                            AndValidator(
-                                listOf(
-                                    OrValidator(
-                                        listOf(
-                                            HorizontalValidator(),
-                                            StraightValidator(),
-                                            DiagonalValidator(),
-                                        )
-                                    ),
-                                    LimitedMovementValidator(1)
-                                )
-                            )
+                            IsEnemyValidator(),
+                            EmptyDestinationValidator()
                         )
-                        //TODO -> enroque validator
-                    )
+                    ),
+                    OrValidator(
+                        listOf(
+                            StraightValidator(),
+                            DiagonalValidator(), // TODO -> LIMITE
+                            HorizontalValidator()
+
+                        )
+                    ),
+
+                    LimitedMovementValidator(1)
                 )
             )
+
         )
     }
 }
+

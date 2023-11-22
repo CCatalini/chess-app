@@ -10,18 +10,31 @@ import edu.austral.dissis.common.validator.board.LegalPositionValidator
 import edu.austral.dissis.common.validator.obstacle.HorizontalEmptyPathValidator
 import edu.austral.dissis.common.validator.direction.HorizontalValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
+import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 import edu.austral.dissis.common.validator.obstacle.StraightEmptyPathValidator
+import edu.austral.dissis.common.validator.piece.IsEnemyValidator
 
 class RookInitializer : PieceInitializer {
 
     override fun initialize(color: Color): Piece {
         val uuid = java.util.UUID.randomUUID().toString()
-        return Piece(uuid,
+        return initialize(color, uuid)
+    }
+
+    override fun initialize(color: Color, id: String): Piece {
+        return Piece(id,
             color,
             PieceType.ROOK,
             AndValidator(
                 listOf(
                     LegalPositionValidator(),
+
+                    OrValidator(
+                        listOf(
+                            IsEnemyValidator(),
+                            EmptyDestinationValidator()
+                        )
+                    ),
 
                     OrValidator(
                         listOf(

@@ -9,11 +9,13 @@ class IsEnemyValidator : Validator {
 
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
         val board = gameState.getCurrentBoard()
+        val piece = board.getPieceByPosition(movement.to)
 
-        board.getPieceByPosition(movement.to)?.let {
-            if (it.getColor() != gameState.getCurrentTurn())
-                return ValidatorResponse.ValidatorResultValid("Es enemigo")
+        return if ( piece == null ) ValidatorResponse.ValidatorResultValid("OK")
+        else {
+            if (piece.color != gameState.getCurrentTurn()) ValidatorResponse.ValidatorResultValid("OK")
+            else ValidatorResponse.ValidatorResultInvalid("Pieza aliada en la posicion de destino")
         }
-        return ValidatorResponse.ValidatorResultInvalid("No es enemigo")
+
     }
 }

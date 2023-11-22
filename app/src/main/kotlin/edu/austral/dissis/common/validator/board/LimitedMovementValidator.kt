@@ -16,7 +16,7 @@ class LimitedMovementValidator( private val maxMoveQuantity: Int ) : edu.austral
         val isHorizontalValid = horizontalDistance <= maxMoveQuantity
         val isVerticalValid = verticalDistance <= maxMoveQuantity
 
-        return if (isHorizontalValid || isVerticalValid || isDiagonal(horizontalDistance, verticalDistance)) {
+        return if (isHorizontalValid && isVerticalValid ) {
             edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultValid("oka")
         } else {
             edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultInvalid("Movement exceeds limit")

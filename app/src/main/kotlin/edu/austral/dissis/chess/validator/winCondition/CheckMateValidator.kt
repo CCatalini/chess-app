@@ -17,7 +17,7 @@ class CheckMateValidator : WinCondition {
     override fun isWin(gameState: IGameState): Boolean {
         val enemyPositions = getAllEnemyPositions(gameState)
 
-
+/*
         for (position in enemyPositions) {
             //recorre todas las piezas enemigas y obtiene todos los movimientos válidos que pueden hacer
             val validMoves : List<Movement> = findAllValidMoves(position, gameState)
@@ -30,7 +30,9 @@ class CheckMateValidator : WinCondition {
             }
         }
 
-        return true
+ */
+
+        return false
 
     }
 

@@ -3,6 +3,7 @@ package edu.austral.dissis.chess.game
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
+import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
 import edu.austral.dissis.common.ITurnValidator
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.WinCondition
@@ -28,7 +29,7 @@ sealed interface IGameState{
     fun getTurnManager() : ITurnValidator
 
     fun getListPreConditions(): List<Validator>
-    fun getListPostConditions() : List<Validator>
+    fun getListPostConditions() : List<PostConditionValidator>
     fun getWinCondition() : WinCondition
 
 }

@@ -10,6 +10,7 @@ import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
 import edu.austral.dissis.common.validator.direction.DiagonalValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
+import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 import edu.austral.dissis.common.validator.obstacle.StraightEmptyPathValidator
 import edu.austral.dissis.common.validator.piece.IsEnemyValidator
 import edu.austral.dissis.common.validator.piece.IsFirstMoveValidator
@@ -18,7 +19,11 @@ class PawnInitializer : PieceInitializer {
 
     override fun initialize(color: Color): Piece {
         val uuid = java.util.UUID.randomUUID().toString()
-        return Piece(uuid,
+        return initialize(color, uuid)
+    }
+
+    override fun initialize(color: Color, id: String): Piece {
+        return Piece(id,
             color,
             PieceType.PAWN,
             AndValidator(
@@ -33,7 +38,8 @@ class PawnInitializer : PieceInitializer {
                                 listOf(
                                     StraightValidator(),
                                     StraightEmptyPathValidator(),
-                                    LimitedMovementValidator(1)
+                                    LimitedMovementValidator(1),
+                                    EmptyDestinationValidator()
                                 )
                             ),
 
@@ -42,7 +48,8 @@ class PawnInitializer : PieceInitializer {
                                     IsFirstMoveValidator(),
                                     StraightValidator(), //TODO -> Pasarle el sentido
                                     StraightEmptyPathValidator(),
-                                    LimitedMovementValidator(2)
+                                    LimitedMovementValidator(2),
+                                    EmptyDestinationValidator()
 
                                 )
                             ),
@@ -63,5 +70,6 @@ class PawnInitializer : PieceInitializer {
             )
         )
     }
+
 
 }

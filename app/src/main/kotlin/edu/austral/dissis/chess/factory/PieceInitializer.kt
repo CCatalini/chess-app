@@ -9,4 +9,5 @@ import edu.austral.dissis.chess.piece.Piece
 interface PieceInitializer {
 
     fun initialize(color: Color): Piece
+    fun initialize(color: Color, id: String) : Piece
 }
