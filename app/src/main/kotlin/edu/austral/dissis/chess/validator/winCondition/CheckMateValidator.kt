@@ -49,7 +49,7 @@ class CheckMateValidator : WinCondition {
 
         for(position in board.getOccupiedPositions()){
             val piece = board.getPieceByPosition(position)
-            if (piece != null && piece.getColor() == enemy) {
+            if (piece != null && piece.color == enemy) {
                 enemyPositions.add(position)
             }
         }

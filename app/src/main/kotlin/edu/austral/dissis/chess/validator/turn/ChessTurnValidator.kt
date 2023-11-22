@@ -25,7 +25,7 @@ class ChessTurnValidator(private val current: Color) : ITurnValidator {
         val pieceToMove: Piece? = getPiece(movement, gameState)
 
         if (pieceToMove != null) {
-            if (pieceToMove.getColor() == this.current) {
+            if (pieceToMove.color == this.current) {
                 return ValidatorResponse.ValidatorResultValid("Es tu turno")
             }
         }

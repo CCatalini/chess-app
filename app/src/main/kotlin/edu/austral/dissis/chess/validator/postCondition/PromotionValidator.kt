@@ -18,11 +18,11 @@ class PromotionValidator : PostConditionValidator{
         for(i in 0..7) {
             val pieceWhite = getPiece(Position(7,i), gameState)
             if ( pieceWhite!= null && isPawn(pieceWhite) && isColor(pieceWhite, Color.WHITE)) {
-                map[Position(7,i)]= QueenInitializer().initialize(Color.WHITE, pieceWhite.getId())
+                map[Position(7,i)]= QueenInitializer().initialize(Color.WHITE, pieceWhite.id)
             }
             val pieceBlack = getPiece(Position(0,i), gameState)
             if (pieceBlack!= null && isPawn(pieceBlack) && isColor(pieceBlack, Color.BLACK)) {
-                map[Position(0,i)]= QueenInitializer().initialize(Color.BLACK, pieceBlack.getId())
+                map[Position(0,i)]= QueenInitializer().initialize(Color.BLACK, pieceBlack.id)
             }
         }
 
@@ -36,10 +36,10 @@ class PromotionValidator : PostConditionValidator{
 
     private fun isPawn(piece: Piece): Boolean {
         return if (piece == null) false
-        else piece.getType() == PieceType.PAWN
+        else piece.type == PieceType.PAWN
     }
 
     private fun isColor(piece: Piece, color: Color): Boolean {
-        return piece.getColor() == color
+        return piece.color == color
     }
 }

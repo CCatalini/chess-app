@@ -10,27 +10,26 @@ data class Piece(val id: String,
                  val type : PieceType,
                  val validator : edu.austral.dissis.common.validator.Validator,
                  private val moveCounter : Int = 0) {
-    @JvmName("getIdCustomName")
+/*
     fun getId(): String {
         return id
     }
 
-    @JvmName("getIdCustomName")
     fun getColor(): Color {
         return color
     }
-    @JvmName("getIdCustomName")
+
     fun getType(): PieceType {
         return type
     }
 
     //para cambiar
-    @JvmName("getIdCustomName")
     fun getValidator(): edu.austral.dissis.common.validator.Validator {
         return validator
     }
 
-    @JvmName("getIdCustomName")
+
+ */
     fun getMoveCounter(): Int {
         return moveCounter
     }
@@ -38,4 +37,5 @@ data class Piece(val id: String,
     fun validateMove(movement: Movement, gameState: IGameState): ValidatorResponse {
         return validator.validate(movement, gameState)
     }
+
 }
