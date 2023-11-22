@@ -11,9 +11,25 @@ class GameFactory {
 
     companion object{
         fun createChessNormalGame(): IGameState {
-            val board = BoardFactory.createChessBoard()
-            val game = GameState(listOf(board), CheckMateValidator(), ChessTurnValidator(Color.WHITE), listOf(), listOf(PromotionValidator()))
-            return game
+            val board = BoardFactory.createClassicChessBoard()
+            return GameState(
+                listOf(board),
+                CheckMateValidator(),
+                ChessTurnValidator(Color.WHITE),
+                listOf(),
+                listOf(PromotionValidator())
+            )
+        }
+
+        fun createChessCapablancaGame(): IGameState {
+            val board = BoardFactory.createCapablancaChessBoard()
+            return GameState(
+                listOf(board),
+                CheckMateValidator(),
+                ChessTurnValidator(Color.WHITE),
+                listOf(),
+                listOf(PromotionValidator())
+            )
         }
     }
 }

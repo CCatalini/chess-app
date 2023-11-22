@@ -12,7 +12,7 @@ class BoardFactoryTest {
 
     @Test
     fun createChessBoard() {
-        val chessBoard: IBoard = BoardFactory.createChessBoard()
+        val chessBoard: IBoard = BoardFactory.createClassicChessBoard()
 
         Assert.assertEquals(Color.WHITE, chessBoard.getPieceByPosition(Position(0, 0))?.color)
         Assert.assertEquals(PieceType.ROOK, chessBoard.getPieceByPosition(Position(0, 0))?.type)

@@ -8,6 +8,8 @@ enum class PieceType {
     QUEEN,
     KING,
 
-    JEDIKNIGHT
+    JEDIKNIGHT,
+    CHANCELLOR,
+    ARCHBISHOP
 
 }
