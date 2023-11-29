@@ -23,7 +23,18 @@ class KnightInitializer : PieceInitializer {
         return Piece(id,
             color,
             PieceType.KNIGHT,
-            KnightMoveValidator()
+            AndValidator(listOf(
+                KnightMoveValidator(),
+                LegalPositionValidator(),
+
+                OrValidator(
+                    listOf(
+                        IsEnemyValidator(),
+                        EmptyDestinationValidator()
+                    )
+                )
+            ))
+
 
         )
     }

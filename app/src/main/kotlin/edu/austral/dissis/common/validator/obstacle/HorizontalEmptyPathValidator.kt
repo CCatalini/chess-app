@@ -8,7 +8,6 @@ import edu.austral.dissis.common.validator.ValidatorResponse
 
 /** Para validar que el camino horizontal esta vacio */
 class HorizontalEmptyPathValidator : edu.austral.dissis.common.validator.Validator {
-
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
         if (movement.from.row != movement.to.row) return ValidatorResponse.ValidatorResultInvalid("No es un movimiento horizontal.")
 
@@ -28,7 +27,6 @@ class HorizontalEmptyPathValidator : edu.austral.dissis.common.validator.Validat
         return ValidatorResponse.ValidatorResultValid("OK")
 
     }
-
 
 }
 
