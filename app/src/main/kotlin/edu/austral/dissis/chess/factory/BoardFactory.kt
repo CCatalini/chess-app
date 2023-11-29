@@ -11,6 +11,9 @@ class BoardFactory {
     companion object{
 
         fun createClassicChessBoard(): IBoard {
+
+
+
             var map: Map<Position, Piece> = mutableMapOf(
                 Position(0, 0) to RookInitializer().initialize(Color.WHITE),
                 Position(0,7) to RookInitializer().initialize(Color.WHITE),

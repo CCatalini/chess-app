@@ -11,9 +11,9 @@ class IsEnemyValidator : Validator {
         val board = gameState.getCurrentBoard()
         val piece = board.getPieceByPosition(movement.to)
 
-        return if ( piece == null ) ValidatorResponse.ValidatorResultValid("OK")
+        return if ( piece == null ) ValidatorResponse.ValidatorResultInvalid("no hay pieza capo")
         else {
-            if (piece.color != gameState.getCurrentTurn()) ValidatorResponse.ValidatorResultValid("OK")
+            if (piece.color != gameState.getCurrentTurn()) ValidatorResponse.ValidatorResultValid("es enemigo ")
             else ValidatorResponse.ValidatorResultInvalid("Pieza aliada en la posicion de destino")
         }
 

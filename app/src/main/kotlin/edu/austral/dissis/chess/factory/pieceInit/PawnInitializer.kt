@@ -9,6 +9,7 @@ import edu.austral.dissis.common.validator.board.LimitedMovementValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
 import edu.austral.dissis.common.validator.direction.DiagonalValidator
+import edu.austral.dissis.common.validator.direction.StraightSenseValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
 import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 import edu.austral.dissis.common.validator.obstacle.StraightEmptyPathValidator
@@ -23,6 +24,9 @@ class PawnInitializer : PieceInitializer {
     }
 
     override fun initialize(color: Color, id: String): Piece {
+
+        val sense = if (color == Color.WHITE) 1 else -1
+
         return Piece(id,
             color,
             PieceType.PAWN,
@@ -39,17 +43,21 @@ class PawnInitializer : PieceInitializer {
                                     StraightValidator(),
                                     StraightEmptyPathValidator(),
                                     LimitedMovementValidator(1),
-                                    EmptyDestinationValidator()
+                                    EmptyDestinationValidator(),
+
+                                    StraightSenseValidator(sense)
                                 )
                             ),
 
                             AndValidator(
                                 listOf( // para el primer movimiento
                                     IsFirstMoveValidator(),
-                                    StraightValidator(), //TODO -> Pasarle el sentido
+                                    StraightValidator(),
                                     StraightEmptyPathValidator(),
                                     LimitedMovementValidator(2),
-                                    EmptyDestinationValidator()
+                                    EmptyDestinationValidator(),
+
+                                    StraightSenseValidator(sense)
 
                                 )
                             ),

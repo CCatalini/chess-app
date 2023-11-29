@@ -4,11 +4,13 @@ import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.validator.Validator
+import edu.austral.dissis.common.validator.ValidatorResponse
 
 /** Para validar que el camino frontal esta vacio */
-class StraightEmptyPathValidator : edu.austral.dissis.common.validator.Validator {
+class StraightEmptyPathValidator : Validator {
 
-    override fun validate(movement: Movement, gameState: IGameState): edu.austral.dissis.common.validator.ValidatorResponse {
+    override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
         val positions : Board = gameState.getCurrentBoard() as Board
 
         val fromX = movement.from.row
@@ -18,10 +20,10 @@ class StraightEmptyPathValidator : edu.austral.dissis.common.validator.Validator
         for (x in fromX + 1..toX) {
             val positionToCheck = Position(x, toY)
             if (positions.getPieceByPosition(positionToCheck) != null) {
-                return edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultInvalid("Hay piezas en el camino")
+                return ValidatorResponse.ValidatorResultInvalid("Hay piezas en el camino")
             }
         }
 
-        return edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultValid("OK")
+        return ValidatorResponse.ValidatorResultValid("OK")
     }
 }
