@@ -17,15 +17,38 @@ class HorizontalEmptyPathValidator : edu.austral.dissis.common.validator.Validat
         val fromY = movement.from.column
         val toY = movement.to.column
 
-        for (y in fromY + 1 until toY) {
+        return isEmptyPath(fromX, fromY, toY, positions)
+    }
+
+
+
+    private fun isEmptyPath(fromX: Int, fromY: Int, toY: Int, positions: Board): ValidatorResponse {
+        val typeMove =
+            if (fromY < toY)     "right movement"
+            else                 "left movement"
+
+        return if (typeMove == "right movement")     isEmptyPathRightMovement(fromX, fromY, toY, positions)
+        else                                         isEmptyPathLeftMovement(fromX, fromY, toY, positions)
+    }
+
+    private fun isEmptyPathRightMovement(fromX: Int, fromY: Int, toY: Int, positions: Board): ValidatorResponse {
+        for (y in fromY + 1..<toY) {
             val positionToCheck = Position(fromX, y)
             if (positions.getPieceByPosition(positionToCheck) != null) {
                 return ValidatorResponse.ValidatorResultInvalid("Hay piezas en el camino")
             }
         }
-
         return ValidatorResponse.ValidatorResultValid("OK")
+    }
 
+    private fun isEmptyPathLeftMovement(fromX: Int, fromY: Int, toY: Int, positions: Board): ValidatorResponse {
+        for (y in fromY - 1 downTo toY +1) {
+            val positionToCheck = Position(fromX, y)
+            if (positions.getPieceByPosition(positionToCheck) != null) {
+                return ValidatorResponse.ValidatorResultInvalid("Hay piezas en el camino")
+            }
+        }
+        return ValidatorResponse.ValidatorResultValid("OK")
     }
 
 }

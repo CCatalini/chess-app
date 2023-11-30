@@ -17,15 +17,41 @@ class StraightEmptyPathValidator : Validator {
         val toX = movement.to.row
         val toY = movement.to.column
 
-        for (x in fromX + 1..toX) {
+        return isEmptyPath(fromX, toX, toY, positions)
+    }
+
+
+
+
+    private fun isEmptyPath(fromX: Int, toX: Int, toY: Int, positions: Board): ValidatorResponse {
+        val typeMove =
+            if( fromX < toX )   "downward movement"
+            else                "upward movement"
+
+        return if (typeMove == "downward movement")   isEmptyPathDownwardMovement(fromX, toX, toY, positions)
+        else                                          isEmptyPathUpwardMovement(fromX, toX, toY, positions)
+    }
+
+    //hacia abajo
+    private fun isEmptyPathDownwardMovement(fromX: Int, toX: Int, toY: Int, positions: Board): ValidatorResponse {
+        for (x in fromX + 1..<toX) {
             val positionToCheck = Position(x, toY)
             if (positions.getPieceByPosition(positionToCheck) != null) {
                 return ValidatorResponse.ValidatorResultInvalid("Hay piezas en el camino")
             }
         }
-
         return ValidatorResponse.ValidatorResultValid("OK")
     }
 
+    //hacia arriba
+    private fun isEmptyPathUpwardMovement(fromX: Int, toX: Int, toY: Int, positions: Board): ValidatorResponse {
+        for (x in fromX - 1 downTo toX +1) {
+            val positionToCheck = Position(x, toY)
+            if (positions.getPieceByPosition(positionToCheck) != null) {
+                return ValidatorResponse.ValidatorResultInvalid("Hay piezas en el camino")
+            }
+        }
+        return ValidatorResponse.ValidatorResultValid("OK")
+    }
 
 }
