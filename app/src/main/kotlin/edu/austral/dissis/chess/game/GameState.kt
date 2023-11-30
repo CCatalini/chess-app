@@ -27,62 +27,31 @@ class GameState(private val boards : List<IBoard>,
 
     override fun movePiece(movement: Movement): IGameState {
         //valida el turno
-        val turnResponse : ValidatorResponse = getTurnManager().validateTurn(movement, this)
-        if ( turnResponse is ValidatorResponse.ValidatorResultInvalid) {
-            return InvalidMoveGameState(this.getBoards(),
-                                        this.getWinCondition(),
-                                        this.getTurnManager(),
-                                        this.getListPreConditions(),
-                                        this.getListPostConditions(),
-                                        turnResponse.message)
-        }
+        val turnResponse : ValidatorResponse = validateTurn(movement)
+        if ( turnResponse is ValidatorResponse.ValidatorResultInvalid)          return invalidMove(turnResponse)
+
         //valida las precondiciones
         val preConditionResponse : ValidatorResponse = validatePreConditions(movement)
-        if (preConditionResponse is ValidatorResponse.ValidatorResultInvalid) {
-            return InvalidMoveGameState(this.getBoards(),
-                                        this.getWinCondition(),
-                                        this.getTurnManager(),
-                                        this.getListPreConditions(),
-                                        this.getListPostConditions(),
-                                        preConditionResponse.message)
-        }
+        if (preConditionResponse is ValidatorResponse.ValidatorResultInvalid)   return invalidMove(preConditionResponse)
+
         //valida los movimientos
         val pieceMoveResponse : ValidatorResponse = validatePieceMove(movement)
-        if (pieceMoveResponse is ValidatorResponse.ValidatorResultInvalid) {
-            return InvalidMoveGameState(this.getBoards(),
-                                        this.getWinCondition(),
-                                        this.getTurnManager(),
-                                        this.getListPreConditions(),
-                                        this.getListPostConditions(),
-                                        pieceMoveResponse.message)
-        }
+        if (pieceMoveResponse is ValidatorResponse.ValidatorResultInvalid)      return invalidMove(pieceMoveResponse)
+
         //valida las postCondiciones
         val boardAux: IBoard = this.getCurrentBoard().update(movement)
 
         val postConditionResponse : PostConditionResult = validatePostConditions(boardAux)
-        val boardAfterPostConditions = if( postConditionResponse is PostConditionResult.ResultValid) postConditionResponse.board else boardAux
+        val gamePostConditions : IGameState = updateGameStateAfterPostConditions(postConditionResponse,boardAux)
 
-        val gameAuxBoards = this.getBoards().toMutableList()
-        gameAuxBoards.add(boardAfterPostConditions)
-
-        val gameAux = GameState(gameAuxBoards,
-                                    this.getWinCondition(),
-                                    this.getTurnManager(),
-                                    this.getListPreConditions(),
-                                    this.getListPostConditions())
         //valida las winConditions
-        if (getWinCondition().isWin(gameAux)) {
-            return FinishGameState(gameAux.getBoards(),
-                                    gameAux.getWinCondition(),
-                                    gameAux.getTurnManager(),
-                                    gameAux.getListPreConditions(),
-                                    gameAux.getListPostConditions())
-        }
+        if (getWinCondition().isWin(gamePostConditions))  return finishedGame(gamePostConditions)
 
+        //incrementa el contador de movimientos de la pieza una vez que se validaron todas las condiciones
         val piece : Piece = this.getCurrentBoard().getPieceByPosition(movement.from)!!
         piece.incrementMoveCounter()
 
-        return GameState(gameAuxBoards,
+        return GameState(gamePostConditions.getBoards(),
                             this.getWinCondition(),
                             this.getTurnManager().nextTurn(),
                             this.getListPreConditions(),
@@ -111,6 +80,21 @@ class GameState(private val boards : List<IBoard>,
         return turnManager.getTurn()
     }
 
+
+
+    private fun validateTurn(movement: Movement): ValidatorResponse {
+        return turnManager.validateTurn(movement, this)
+    }
+
+    private fun invalidMove(response: ValidatorResponse.ValidatorResultInvalid): IGameState {
+        return InvalidMoveGameState(this.getBoards(),
+                                    this.getWinCondition(),
+                                    this.getTurnManager(),
+                                    this.getListPreConditions(),
+                                    this.getListPostConditions(),
+                                    response.message)
+    }
+
     private fun validatePreConditions(movement: Movement): ValidatorResponse {
         for (preCondition in getListPreConditions()) {
             when (val preConditionResponse : ValidatorResponse = preCondition.validate(movement, this)) {
@@ -118,13 +102,14 @@ class GameState(private val boards : List<IBoard>,
                 is ValidatorResponse.ValidatorResultValid -> continue
             }
         }
-        return ValidatorResponse.ValidatorResultValid("Se cumplen todas las precondiciones")
+        return ValidatorResponse.ValidatorResultValid("OK")
     }
 
     private fun validatePieceMove(movement: Movement): ValidatorResponse {
         val piece = getCurrentBoard().getPieceByPosition(movement.from) ?: return ValidatorResponse.ValidatorResultInvalid("No hay una pieza en esta posicion para mover")
         return piece.validateMove(movement, this)
     }
+
 
     private fun validatePostConditions( board : IBoard): PostConditionResult {
         var boardAux : IBoard = board
@@ -137,4 +122,27 @@ class GameState(private val boards : List<IBoard>,
         return PostConditionResult.ResultValid(boardAux)
     }
 
+    private fun updateGameStateAfterPostConditions(postConditionResponse: PostConditionResult, boardAux: IBoard): IGameState {
+        return if (postConditionResponse is PostConditionResult.ResultValid) {
+            GameState(this.getBoards().toMutableList().apply { add(postConditionResponse.board) },
+                    this.getWinCondition(),
+                    this.getTurnManager(),
+                    this.getListPreConditions(),
+                    this.getListPostConditions())
+        } else {
+            GameState(this.getBoards().toMutableList().apply { add(boardAux) },
+                    this.getWinCondition(),
+                    this.getTurnManager(),
+                    this.getListPreConditions(),
+                    this.getListPostConditions())
+        }
+    }
+
+    private fun finishedGame(gamePostConditions: IGameState): IGameState {
+        return FinishGameState(gamePostConditions.getBoards(),
+                                gamePostConditions.getWinCondition(),
+                                gamePostConditions.getTurnManager(),
+                                gamePostConditions.getListPreConditions(),
+                                gamePostConditions.getListPostConditions())
+    }
 }
