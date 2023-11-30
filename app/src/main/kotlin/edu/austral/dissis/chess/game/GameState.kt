@@ -3,6 +3,7 @@ package edu.austral.dissis.chess.game
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.piece.Color
+import edu.austral.dissis.chess.piece.Piece
 import edu.austral.dissis.chess.validator.postCondition.PostConditionResult
 import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
 import edu.austral.dissis.common.ITurnValidator
@@ -77,6 +78,9 @@ class GameState(private val boards : List<IBoard>,
                                     gameAux.getListPreConditions(),
                                     gameAux.getListPostConditions())
         }
+
+        val piece : Piece = this.getCurrentBoard().getPieceByPosition(movement.from)!!
+        piece.incrementMoveCounter()
 
         return GameState(gameAuxBoards,
                             this.getWinCondition(),

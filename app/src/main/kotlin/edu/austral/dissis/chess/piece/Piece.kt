@@ -9,27 +9,13 @@ data class Piece(val id: String,
                  val color: Color,
                  val type : PieceType,
                  val validator : edu.austral.dissis.common.validator.Validator,
-                 private val moveCounter : Int = 0) {
-/*
-    fun getId(): String {
-        return id
+                 private var moveCounter : Int = 0) {
+
+
+    fun incrementMoveCounter() {
+        moveCounter++
     }
 
-    fun getColor(): Color {
-        return color
-    }
-
-    fun getType(): PieceType {
-        return type
-    }
-
-    //para cambiar
-    fun getValidator(): edu.austral.dissis.common.validator.Validator {
-        return validator
-    }
-
-
- */
     fun getMoveCounter(): Int {
         return moveCounter
     }
