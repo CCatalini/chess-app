@@ -1,9 +1,9 @@
 package edu.austral.dissis.chess.factory.pieceInit
 
 import edu.austral.dissis.chess.factory.PieceInitializer
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
-import edu.austral.dissis.chess.piece.PieceType
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.board.LegalPositionValidator
 import edu.austral.dissis.common.validator.board.LimitedMovementValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
@@ -29,7 +29,7 @@ class PawnInitializer : PieceInitializer {
 
         return Piece(id,
             color,
-            PieceType.PAWN,
+            PieceType.ChessPieceType.PAWN,
             AndValidator(
                 listOf(
 

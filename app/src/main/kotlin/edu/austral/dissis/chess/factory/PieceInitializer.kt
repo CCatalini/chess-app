@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.factory
 
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
 
 
 interface PieceInitializer {

@@ -2,18 +2,18 @@ package edu.austral.dissis.chess.game
 
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.chess.validator.postCondition.PostConditionResult
 import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
-import edu.austral.dissis.common.ITurnValidator
+import edu.austral.dissis.common.TurnValidator
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
 import edu.austral.dissis.common.validator.WinCondition
 
 class GameState(private val boards : List<IBoard>,
                 private val winCondition: WinCondition,
-                private val turnManager: ITurnValidator,
+                private val turnManager: TurnValidator,
                 private val preConditions: List<Validator>,
                 private val postConditions: List<PostConditionValidator>) : IGameState {
 
@@ -60,7 +60,7 @@ class GameState(private val boards : List<IBoard>,
 
 
 
-    override fun getTurnManager(): ITurnValidator {
+    override fun getTurnManager(): TurnValidator {
         return turnManager
     }
 
@@ -97,10 +97,7 @@ class GameState(private val boards : List<IBoard>,
 
     private fun validatePreConditions(movement: Movement): ValidatorResponse {
         for (preCondition in getListPreConditions()) {
-            when (val preConditionResponse : ValidatorResponse = preCondition.validate(movement, this)) {
-                is ValidatorResponse.ValidatorResultInvalid -> return preConditionResponse
-                is ValidatorResponse.ValidatorResultValid -> continue
-            }
+            return preCondition.validate(movement, this) ?: continue
         }
         return ValidatorResponse.ValidatorResultValid("OK")
     }

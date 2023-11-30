@@ -2,7 +2,7 @@ package chess.validator
 import edu.austral.dissis.chess.game.GameState
 import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.piece.Color
+import edu.austral.dissis.common.Color
 import edu.austral.dissis.chess.validator.turn.ChessTurnValidator
 import edu.austral.dissis.chess.validator.winCondition.CheckMateValidator
 import edu.austral.dissis.common.board.Board

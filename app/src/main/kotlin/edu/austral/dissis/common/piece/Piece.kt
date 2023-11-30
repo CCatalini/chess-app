@@ -1,14 +1,16 @@
-package edu.austral.dissis.chess.piece
+package edu.austral.dissis.common.piece
 
 import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
 
 //pieza genérica
 data class Piece(val id: String,
                  val color: Color,
                  val type : PieceType,
-                 val validator : edu.austral.dissis.common.validator.Validator,
+                 val validator : Validator,
                  private var moveCounter : Int = 0) {
 
 

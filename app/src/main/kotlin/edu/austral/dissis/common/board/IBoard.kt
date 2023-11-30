@@ -1,8 +1,7 @@
 package edu.austral.dissis.common.board
 
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
+import edu.austral.dissis.common.piece.Piece
 
 interface IBoard {
 

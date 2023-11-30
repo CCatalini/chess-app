@@ -4,13 +4,14 @@ import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
-import edu.austral.dissis.chess.piece.PieceType
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.ValidatorResponse
 import edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultValid
 
-//queda sin implementar Validator porque lo usamos auxiliar
+//queda sin implementar Validator porque lo uso como
+// auxiliar
 class CheckValidator {
 
      fun validate( gameState: IGameState): Boolean {
@@ -28,9 +29,10 @@ class CheckValidator {
         return false
     }
 
-    private fun getKingPosition(actualBoard: IBoard, color: Color): Position? {
-        actualBoard.getOccupiedPositions().forEach { coordinate ->
-            if (actualBoard.getPieceByPosition(coordinate)?.type == PieceType.KING && actualBoard.getPieceByPosition(coordinate)?.color == color) {
+    private fun getKingPosition(actualBoard: IBoard, kingColor: Color): Position? {
+        actualBoard.getOccupiedPositions().forEach {
+            coordinate ->
+            if (actualBoard.getPieceByPosition(coordinate)?.type == PieceType.ChessPieceType.KING && actualBoard.getPieceByPosition(coordinate)?.color == kingColor) {
                 return coordinate
             }
         }

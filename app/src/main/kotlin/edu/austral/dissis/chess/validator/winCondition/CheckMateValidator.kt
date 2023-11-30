@@ -4,8 +4,8 @@ import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.chess.validator.postCondition.CheckValidator
 import edu.austral.dissis.common.validator.ValidatorResponse
 import edu.austral.dissis.common.validator.WinCondition

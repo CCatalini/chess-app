@@ -1,10 +1,10 @@
 package edu.austral.dissis.chess.factory.pieceInit
 
 import edu.austral.dissis.chess.factory.PieceInitializer
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
-import edu.austral.dissis.chess.piece.PieceType
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.chess.validator.KnightMoveValidator
+import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.board.LegalPositionValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
@@ -23,7 +23,7 @@ class ArchbishopInitializer : PieceInitializer {
     override fun initialize(color: Color, id: String): Piece {
         return Piece(id,
             color,
-            PieceType.ARCHBISHOP,
+            PieceType.ChessPieceType.ARCHBISHOP,
             AndValidator(
                 listOf(
                     LegalPositionValidator(),

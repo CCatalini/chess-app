@@ -7,8 +7,8 @@ import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
 
-//usamos el checkValidator porque es mas facil negarlo que checkear si en todas las jugadas no queda en jaque
-//preCondicion del game
+//usamos el checkValidator porque es más fácil negarlo que checkear si en todas las jugadas no queda en jaque
+//preCondition del game
 class IsNotCheckValidator : Validator {
 
     private val checkValidator : CheckValidator = CheckValidator()
@@ -24,9 +24,9 @@ class IsNotCheckValidator : Validator {
                                     gameState.getListPreConditions(),
                                     gameState.getListPostConditions())
         return if ( checkValidator.validate(gameAux) ) {
-            ValidatorResponse.ValidatorResultInvalid("El rey queda en jaque")
+            ValidatorResponse.ValidatorResultInvalid("Regla numero 1: No te regales, estas quedando en jaque")
         } else {
-            ValidatorResponse.ValidatorResultValid("El rey no queda en jaque")
+            ValidatorResponse.ValidatorResultValid("OK")
         }
     }
 }

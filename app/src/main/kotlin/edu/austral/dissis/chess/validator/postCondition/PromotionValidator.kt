@@ -2,12 +2,12 @@ package edu.austral.dissis.chess.validator.postCondition
 
 import edu.austral.dissis.chess.factory.pieceInit.QueenInitializer
 import edu.austral.dissis.chess.game.IGameState
-import edu.austral.dissis.chess.piece.Color
-import edu.austral.dissis.chess.piece.Piece
-import edu.austral.dissis.chess.piece.PieceType
+import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
+import edu.austral.dissis.common.piece.PieceType
 
 class PromotionValidator : PostConditionValidator{
 
@@ -35,8 +35,7 @@ class PromotionValidator : PostConditionValidator{
     }
 
     private fun isPawn(piece: Piece): Boolean {
-        return if (piece == null) false
-        else piece.type == PieceType.PAWN
+        return piece.type == PieceType.ChessPieceType.PAWN
     }
 
     private fun isColor(piece: Piece, color: Color): Boolean {

@@ -8,7 +8,7 @@ import edu.austral.dissis.chess.game.IGameState
 import edu.austral.dissis.chess.game.InvalidMoveGameState
 import edu.austral.dissis.chess.gui.*
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.piece.Color
+import edu.austral.dissis.common.Color
 
 class Adapter(private var gameState: IGameState) : GameEngine {
 
