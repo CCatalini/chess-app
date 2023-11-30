@@ -15,14 +15,13 @@ class IsNotCheckValidator : Validator {
 
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
 
-        val boardAux : IBoard = gameState.getCurrentBoard().update(movement)
-        val gameAuxBoards = gameState.getBoards().toMutableList()
-        gameAuxBoards.add(boardAux)
-        val gameAux = GameState(gameAuxBoards,
-                                    gameState.getWinCondition(),
-                                    gameState.getTurnManager(),
-                                    gameState.getListPreConditions(),
-                                    gameState.getListPostConditions())
+        val boardAfterMove : IBoard = gameState.getCurrentBoard().update(movement)
+        val gameAux : IGameState = GameState(gameState.getBoards() + boardAfterMove,
+            gameState.getWinCondition(),
+            gameState.getTurnManager(),
+            gameState.getListPreConditions(),
+            gameState.getListPostConditions())
+
         return if ( checkValidator.validate(gameAux) ) {
             ValidatorResponse.ValidatorResultInvalid("Regla numero 1: No te regales, estas quedando en jaque")
         } else {

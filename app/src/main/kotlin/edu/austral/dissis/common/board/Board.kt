@@ -33,7 +33,6 @@ class Board(private val width: Int,
         return piecePositions
     }
 
-    //todo --> validar el movimiento de la pieza, si es verdadero actualizar, si es falso devolver el mismo tablero
     override fun update(movement: Movement): IBoard {
         val newPiecePositions = piecePositions.toMutableMap()
         newPiecePositions.remove(movement.from)

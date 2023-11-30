@@ -6,6 +6,7 @@ import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.Position
+import edu.austral.dissis.common.piece.PieceType
 import org.junit.Assert
 import org.junit.Test
 
@@ -18,7 +19,7 @@ class BoardTest {
         val updatedBoard = initialBoard.update(movement)
 
         Assert.assertNull(updatedBoard.getPieceByPosition(Position(0, 0)))
-        Assert.assertEquals(ChessPieceType.ROOK, updatedBoard.getPieceByPosition(Position(1, 1))?.type)
+        Assert.assertEquals(PieceType.ChessPieceType.ROOK, updatedBoard.getPieceByPosition(Position(1, 1))?.type)
     }
 
 
@@ -29,7 +30,7 @@ class BoardTest {
         val updatedBoard = initialBoard.update(movement)
 
         Assert.assertNull(updatedBoard.getPieceByPosition(Position(1, 1)))
-        Assert.assertEquals(ChessPieceType.PAWN, updatedBoard.getPieceByPosition(Position(2, 1))?.type)
+        Assert.assertEquals(PieceType.ChessPieceType.PAWN, updatedBoard.getPieceByPosition(Position(2, 1))?.type)
     }
 
 }

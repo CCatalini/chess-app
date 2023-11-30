@@ -10,25 +10,26 @@ import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.ValidatorResponse
 import edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultValid
 
-//queda sin implementar Validator porque lo uso como
-// auxiliar
+//para ver si mis piezas me dejan en check
 class CheckValidator {
 
+    //recibe un gameState mockeado con MI movimiento y valida si me dejo en check
      fun validate( gameState: IGameState): Boolean {
 
-        val kingColor: Color = gameState.getCurrentTurn()
+        val myKingColor: Color = gameState.getCurrentTurn()
         val actualBoard: IBoard = gameState.getCurrentBoard()
-        val kingPosition: Position = getKingPosition(actualBoard, kingColor)?: throw NoSuchElementException("No esta el rey capo")
-        val enemyCoordinates: List<Position> = actualBoard.getOccupiedPositions()
+        val kingPosition: Position = getKingPosition(actualBoard, myKingColor) ?: throw NoSuchElementException("No esta el rey capo")
+        val enemyPositions: List<Position> = getEnemyPositions(actualBoard, myKingColor)
 
-        for(position in enemyCoordinates) {
-            if (pieceAttacksKing(gameState, position, kingColor, kingPosition)) {
-                return true
+        for(enemyPosition in enemyPositions) {
+            if (pieceAttacksKing(gameState, enemyPosition, kingPosition)) {
+                return true // me deja en check
             }
         }
         return false
     }
 
+    //OK
     private fun getKingPosition(actualBoard: IBoard, kingColor: Color): Position? {
         actualBoard.getOccupiedPositions().forEach {
             coordinate ->
@@ -39,20 +40,26 @@ class CheckValidator {
         return null
     }
 
-    private fun pieceAttacksKing(gameState: IGameState,
-                                 position: Position,
-                                 kingColor: Color,
-                                 kingPosition: Position): Boolean {
-        if (gameState.getCurrentBoard().getPieceByPosition(position)?.color != kingColor) {
-            val piece : Piece = gameState.getCurrentBoard().getPieceByPosition(position) ?: throw NoSuchElementException("No esta la pieza capo")
-            when (
-                piece.validateMove(Movement(position, kingPosition), gameState  )
-            ) {
-                is ValidatorResultValid -> return true
-                is ValidatorResponse.ValidatorResultInvalid -> {}
+    private fun getEnemyPositions(actualBoard: IBoard, kingColor: Color): List<Position> {
+        val enemyPositions: MutableList<Position> = mutableListOf()
+        actualBoard.getOccupiedPositions().forEach {
+            coordinate ->
+            if (actualBoard.getPieceByPosition(coordinate)?.color != kingColor) {
+                enemyPositions.add(coordinate)
             }
         }
-        return false
+        return enemyPositions
+    }
+
+    private fun pieceAttacksKing(gameState: IGameState,
+                                 enemyPosition: Position,
+                                 kingPosition: Position): Boolean {
+        val enemy : Piece = gameState.getCurrentBoard().getPieceByPosition(enemyPosition) ?: throw NoSuchElementException("No esta la pieza capo")
+        // checkea si para este enemigo es valido moverse al rey según las reglas del gameState
+        return when (enemy.validateMove( Movement(enemyPosition, kingPosition), gameState)) {
+            is ValidatorResultValid -> true
+            is ValidatorResponse.ValidatorResultInvalid -> false
+        }
     }
 
 }

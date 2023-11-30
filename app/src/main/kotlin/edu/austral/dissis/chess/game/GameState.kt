@@ -30,13 +30,13 @@ class GameState(private val boards : List<IBoard>,
         val turnResponse : ValidatorResponse = validateTurn(movement)
         if ( turnResponse is ValidatorResponse.ValidatorResultInvalid)          return invalidMove(turnResponse)
 
-        //valida las precondiciones
-        val preConditionResponse : ValidatorResponse = validatePreConditions(movement)
-        if (preConditionResponse is ValidatorResponse.ValidatorResultInvalid)   return invalidMove(preConditionResponse)
-
         //valida los movimientos
         val pieceMoveResponse : ValidatorResponse = validatePieceMove(movement)
         if (pieceMoveResponse is ValidatorResponse.ValidatorResultInvalid)      return invalidMove(pieceMoveResponse)
+
+        //valida las precondiciones
+        val preConditionResponse : ValidatorResponse = validatePreConditions(movement)
+        if (preConditionResponse is ValidatorResponse.ValidatorResultInvalid)   return invalidMove(preConditionResponse)
 
         //valida las postCondiciones
         val boardAux: IBoard = this.getCurrentBoard().update(movement)
@@ -97,13 +97,16 @@ class GameState(private val boards : List<IBoard>,
 
     private fun validatePreConditions(movement: Movement): ValidatorResponse {
         for (preCondition in getListPreConditions()) {
-            return preCondition.validate(movement, this) ?: continue
+            if (preCondition.validate(movement, this) is ValidatorResponse.ValidatorResultInvalid) {
+                return ValidatorResponse.ValidatorResultInvalid("No se cumple una precondición")
+            }
         }
         return ValidatorResponse.ValidatorResultValid("OK")
     }
 
+
     private fun validatePieceMove(movement: Movement): ValidatorResponse {
-        val piece = getCurrentBoard().getPieceByPosition(movement.from) ?: return ValidatorResponse.ValidatorResultInvalid("No hay una pieza en esta posicion para mover")
+        val piece = getCurrentBoard().getPieceByPosition(movement.from) ?: return ValidatorResponse.ValidatorResultInvalid("No hay una pieza en esta posición para mover")
         return piece.validateMove(movement, this)
     }
 
