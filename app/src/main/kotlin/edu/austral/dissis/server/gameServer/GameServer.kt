@@ -56,7 +56,6 @@ class GameServer(private var gameState: IGameState,
     }
 
 
-
     private fun initializeServer(): Server {
         return builder
             .withPort(420) // asignamos el puerto
