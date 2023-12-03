@@ -13,53 +13,58 @@ import edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultVali
 //para ver si mis piezas me dejan en check
 class CheckValidator {
 
-    //recibe un gameState mockeado con MI movimiento y valida si me dejo en check
-     fun validate( gameState: IGameState): Boolean {
-
-        val myKingColor: Color = gameState.getCurrentTurn()
-        val actualBoard: IBoard = gameState.getCurrentBoard()
-        val kingPosition: Position = getKingPosition(actualBoard, myKingColor) ?: throw NoSuchElementException("No esta el rey capo")
-        val enemyPositions: List<Position> = getEnemyPositions(actualBoard, myKingColor)
-
+    /*
+    *
+    * Revisa si esta en check el rey del color que se le pasa
+    *
+    * */
+    fun inCheck(gameState: IGameState, kingColor: Color): Boolean {
+        val board = gameState.getCurrentBoard()
+        val kingPosition = getKingPosition(board, kingColor) ?: return true
+        val enemyPositions = getEnemyPositions(board, kingColor)
         for(enemyPosition in enemyPositions) {
             if (pieceAttacksKing(gameState, enemyPosition, kingPosition)) {
-                return true // me deja en check
+                return true
             }
         }
         return false
     }
 
-    //OK
-    private fun getKingPosition(actualBoard: IBoard, kingColor: Color): Position? {
-        actualBoard.getOccupiedPositions().forEach {
-            coordinate ->
-            if (actualBoard.getPieceByPosition(coordinate)?.type == PieceType.ChessPieceType.KING && actualBoard.getPieceByPosition(coordinate)?.color == kingColor) {
+    private fun getKingPosition(board: IBoard, kingColor: Color): Position? {
+        board.getOccupiedPositions().forEach {
+                coordinate ->
+            val piece = board.getPieceByPosition(coordinate)
+            if (isKing(piece) && matchesColor(piece, kingColor)) {
                 return coordinate
             }
         }
         return null
     }
 
-    private fun getEnemyPositions(actualBoard: IBoard, kingColor: Color): List<Position> {
+    private fun isKing(piece: Piece?): Boolean{
+        return (piece?.type == PieceType.ChessPieceType.KING)
+    }
+
+    private fun matchesColor(piece: Piece?, color: Color): Boolean{
+        return (piece?.color == color)
+    }
+
+    private fun getEnemyPositions(board: IBoard, kingColor: Color): List<Position> {
         val enemyPositions: MutableList<Position> = mutableListOf()
-        actualBoard.getOccupiedPositions().forEach {
-            coordinate ->
-            if (actualBoard.getPieceByPosition(coordinate)?.color != kingColor) {
+        board.getOccupiedPositions().forEach {
+                coordinate ->
+            val piece = board.getPieceByPosition(coordinate)
+            if (!matchesColor(piece, kingColor)) {
                 enemyPositions.add(coordinate)
             }
         }
         return enemyPositions
     }
 
-    private fun pieceAttacksKing(gameState: IGameState,
-                                 enemyPosition: Position,
-                                 kingPosition: Position): Boolean {
-        val enemy : Piece = gameState.getCurrentBoard().getPieceByPosition(enemyPosition) ?: throw NoSuchElementException("No esta la pieza capo")
-        // checkea si para este enemigo es valido moverse al rey según las reglas del gameState
-        return when (enemy.validateMove( Movement(enemyPosition, kingPosition), gameState)) {
-            is ValidatorResultValid -> true
-            is ValidatorResponse.ValidatorResultInvalid -> false
-        }
+    private fun pieceAttacksKing(gameState: IGameState, enemyPosition: Position, kingPosition: Position): Boolean {
+        val enemy : Piece = gameState.getCurrentBoard().getPieceByPosition(enemyPosition) ?: return false
+        val move : Movement = Movement(enemyPosition, kingPosition)
+        return enemy.validateMove(move, gameState) is ValidatorResponse.ValidatorResultValid
     }
 
 }

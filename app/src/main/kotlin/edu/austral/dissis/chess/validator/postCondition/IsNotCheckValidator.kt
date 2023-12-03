@@ -11,21 +11,29 @@ import edu.austral.dissis.common.validator.ValidatorResponse
 //preCondition del game
 class IsNotCheckValidator : Validator {
 
-    private val checkValidator : CheckValidator = CheckValidator()
+    private val checkValidator = CheckValidator()
 
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
+        val newGameState = simulateMove(movement, gameState) //simulo el movimiento
+        val kingColor = gameState.getCurrentTurn()
+        return if (checkValidator.inCheck(newGameState, kingColor)) { //me fijo si me deja al actual turno en check
+            ValidatorResponse.ValidatorResultInvalid("Regla numero 1: no te regales (check)")
+        } else {
+            ValidatorResponse.ValidatorResultValid("You are not in check")
+        }
+    }
 
-        val boardAfterMove : IBoard = gameState.getCurrentBoard().update(movement)
-        val gameAux : IGameState = GameState(gameState.getBoards() + boardAfterMove,
+
+    private fun simulateMove(movement: Movement, gameState: IGameState): IGameState {
+        val newBoard = gameState.getCurrentBoard().update(movement)
+        val newBoards = gameState.getBoards().toMutableList()
+        newBoards.add(newBoard)
+        return GameState(
+            newBoards,
             gameState.getWinCondition(),
             gameState.getTurnManager(),
             gameState.getListPreConditions(),
-            gameState.getListPostConditions())
-
-        return if ( checkValidator.validate(gameAux) ) {
-            ValidatorResponse.ValidatorResultInvalid("Regla numero 1: No te regales, estas quedando en jaque")
-        } else {
-            ValidatorResponse.ValidatorResultValid("OK")
-        }
+            gameState.getListPostConditions()
+        )
     }
 }
