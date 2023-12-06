@@ -77,7 +77,7 @@ fun createCapablancaChessBoard(): IBoard {
         map = map.plus(Position(8, i) to PawnInitializer().initialize(Color.BLACK))
     }
 
-    return Board(10, 8, map)
+    return Board(10, 10, map)
 }
 
 fun createRookTestBoard(): IBoard {

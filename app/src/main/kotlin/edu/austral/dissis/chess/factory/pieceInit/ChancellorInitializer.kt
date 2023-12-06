@@ -8,8 +8,10 @@ import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.board.LegalPositionValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
+import edu.austral.dissis.common.validator.direction.DiagonalValidator
 import edu.austral.dissis.common.validator.direction.HorizontalValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
+import edu.austral.dissis.common.validator.obstacle.DiagonalEmptyPathValidator
 import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 import edu.austral.dissis.common.validator.obstacle.HorizontalEmptyPathValidator
 import edu.austral.dissis.common.validator.obstacle.StraightEmptyPathValidator
@@ -28,35 +30,29 @@ class ChancellorInitializer : PieceInitializer {
             PieceType.ChessPieceType.CHANCELLOR,
             AndValidator(
                 listOf(
+
                     LegalPositionValidator(),
+
+                    OrValidator(listOf(
+                        KnightMoveValidator(),
+
+                        AndValidator(listOf(
+                            StraightValidator(),
+                            StraightEmptyPathValidator()
+                        )),
+
+                        AndValidator(listOf(
+                            HorizontalValidator(),
+                            HorizontalEmptyPathValidator()
+                        ))
+                    )),
 
                     OrValidator(
                         listOf(
                             IsEnemyValidator(),
                             EmptyDestinationValidator()
-                        )
-                    ),
+                    ))
 
-                    OrValidator(
-                        listOf(
-
-                            AndValidator(
-                                listOf(
-                                    HorizontalValidator(),
-                                    HorizontalEmptyPathValidator()
-                                )
-                            ),
-
-                            AndValidator(
-                                listOf(
-                                    StraightValidator(),
-                                    StraightEmptyPathValidator()
-                                )
-                            ),
-                        )
-                    ),
-
-                    KnightMoveValidator()
                 )
             )
         )

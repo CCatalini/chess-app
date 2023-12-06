@@ -26,17 +26,24 @@ class ArchbishopInitializer : PieceInitializer {
             PieceType.ChessPieceType.ARCHBISHOP,
             AndValidator(
                 listOf(
+
                     LegalPositionValidator(),
-                    DiagonalValidator(),
-                    DiagonalEmptyPathValidator(),
+
+                    OrValidator(listOf(
+                        KnightMoveValidator(),
+
+                        AndValidator(listOf(
+                           DiagonalValidator(),
+                           DiagonalEmptyPathValidator()
+                        ))
+                    )),
 
                     OrValidator(
                         listOf(
                             IsEnemyValidator(),
                             EmptyDestinationValidator()
-                        )
-                    ),
-                    KnightMoveValidator()
+                    )),
+
                 )
             )
         )
