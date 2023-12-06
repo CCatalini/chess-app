@@ -1,6 +1,6 @@
 package chess.board
 
-import edu.austral.dissis.chess.factory.BoardFactory
+import edu.austral.dissis.chess.factory.createClassicChessBoard
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.board.Position
@@ -12,7 +12,7 @@ class BoardFactoryTest {
 
     @Test
     fun createChessBoard() {
-        val chessBoard: IBoard = BoardFactory.createClassicChessBoard()
+        val chessBoard: IBoard = createClassicChessBoard()
 
         Assert.assertEquals(Color.WHITE, chessBoard.getPieceByPosition(Position(0, 0))?.color)
         Assert.assertEquals(PieceType.ChessPieceType.ROOK, chessBoard.getPieceByPosition(Position(0, 0))?.type)
