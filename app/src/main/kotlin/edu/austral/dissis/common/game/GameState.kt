@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.game
+package edu.austral.dissis.common.game
 
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
@@ -39,10 +39,10 @@ class GameState(private val boards : List<IBoard>,
         if (preConditionResponse is ValidatorResponse.ValidatorResultInvalid)   return invalidMove(preConditionResponse)
 
         //valida las postCondiciones
-        val boardAux: IBoard = this.getCurrentBoard().update(movement)
+        val boardAfterMove: IBoard = this.getCurrentBoard().update(movement)
 
-        val postConditionResponse : PostConditionResult = validatePostConditions(boardAux)
-        val gamePostConditions : IGameState = updateGameStateAfterPostConditions(postConditionResponse,boardAux)
+        val postConditionResponse : PostConditionResult = validatePostConditions(boardAfterMove)
+        val gamePostConditions : IGameState = updateGameStateAfterPostConditions(postConditionResponse,boardAfterMove)
 
         //valida las winConditions
         if (getWinCondition().isWin(gamePostConditions))  return finishedGame(gamePostConditions)
@@ -52,10 +52,10 @@ class GameState(private val boards : List<IBoard>,
         piece.incrementMoveCounter()
 
         return GameState(gamePostConditions.getBoards(),
-                            this.getWinCondition(),
-                            this.getTurnManager().nextTurn(),
-                            this.getListPreConditions(),
-                            this.getListPostConditions())
+            this.getWinCondition(),
+            this.getTurnManager().nextTurn(),
+            this.getListPreConditions(),
+            this.getListPostConditions())
     }
 
 
@@ -87,12 +87,7 @@ class GameState(private val boards : List<IBoard>,
     }
 
     private fun invalidMove(response: ValidatorResponse.ValidatorResultInvalid): IGameState {
-        return InvalidMoveGameState(this.getBoards(),
-                                    this.getWinCondition(),
-                                    this.getTurnManager(),
-                                    this.getListPreConditions(),
-                                    this.getListPostConditions(),
-                                    response.message)
+        return InvalidMoveGameState(this, response.message)
     }
 
     private fun validatePreConditions(movement: Movement): ValidatorResponse {
@@ -107,7 +102,7 @@ class GameState(private val boards : List<IBoard>,
 
 
     private fun validatePieceMove(movement: Movement): ValidatorResponse {
-        val piece = getCurrentBoard().getPieceByPosition(movement.from) ?: return ValidatorResponse.ValidatorResultInvalid("No hay una pieza en esta posición para mover")
+        val piece = getCurrentBoard().getPieceByPosition(movement.from) ?: return ValidatorResponse.ValidatorResultInvalid("No hay una pieza en esta posiciÃ³n para mover")
         return piece.validateMove(movement, this)
     }
 
@@ -125,25 +120,26 @@ class GameState(private val boards : List<IBoard>,
 
     private fun updateGameStateAfterPostConditions(postConditionResponse: PostConditionResult, boardAux: IBoard): IGameState {
         return if (postConditionResponse is PostConditionResult.ResultValid) {
-            GameState(this.getBoards().toMutableList().apply { add(postConditionResponse.board) },
-                    this.getWinCondition(),
-                    this.getTurnManager(),
-                    this.getListPreConditions(),
-                    this.getListPostConditions())
+            val board = postConditionResponse.board
+            GameState(this.getBoards().toMutableList().apply { add(board) },
+                this.getWinCondition(),
+                this.getTurnManager(),
+                this.getListPreConditions(),
+                this.getListPostConditions())
         } else {
             GameState(this.getBoards().toMutableList().apply { add(boardAux) },
-                    this.getWinCondition(),
-                    this.getTurnManager(),
-                    this.getListPreConditions(),
-                    this.getListPostConditions())
+                this.getWinCondition(),
+                this.getTurnManager(),
+                this.getListPreConditions(),
+                this.getListPostConditions())
         }
     }
 
     private fun finishedGame(gamePostConditions: IGameState): IGameState {
         return FinishGameState(gamePostConditions.getBoards(),
-                                gamePostConditions.getWinCondition(),
-                                gamePostConditions.getTurnManager(),
-                                gamePostConditions.getListPreConditions(),
-                                gamePostConditions.getListPostConditions())
+            gamePostConditions.getWinCondition(),
+            gamePostConditions.getTurnManager(),
+            gamePostConditions.getListPreConditions(),
+            gamePostConditions.getListPostConditions())
     }
 }

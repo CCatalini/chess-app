@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.validator.board
 
-import edu.austral.dissis.chess.game.IGameState
+import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
 
 /** Clase para validar que el movimiento caiga dentro del tablero. */

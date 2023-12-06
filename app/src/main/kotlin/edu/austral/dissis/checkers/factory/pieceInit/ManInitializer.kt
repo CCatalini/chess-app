@@ -5,6 +5,7 @@ import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.composition.AndValidator
+import edu.austral.dissis.common.validator.composition.OrValidator
 
 class ManInitializer : PieceInitializer {
 
@@ -19,8 +20,8 @@ class ManInitializer : PieceInitializer {
         return Piece(id,
             color,
             PieceType.CheckersPieceType.MAN,
-            AndValidator(listOf(
-
+            OrValidator(listOf(
+                AndValidator(listOf())
             )))
     }
 

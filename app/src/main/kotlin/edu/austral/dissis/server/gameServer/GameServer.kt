@@ -1,10 +1,10 @@
 package edu.austral.dissis.server.gameServer
 
 import com.fasterxml.jackson.core.type.TypeReference
-import edu.austral.dissis.chess.game.FinishGameState
-import edu.austral.dissis.chess.game.GameState
-import edu.austral.dissis.chess.game.IGameState
-import edu.austral.dissis.chess.game.InvalidMoveGameState
+import edu.austral.dissis.common.game.FinishGameState
+import edu.austral.dissis.common.game.GameState
+import edu.austral.dissis.common.game.IGameState
+import edu.austral.dissis.common.game.InvalidMoveGameState
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.server.listener.MovementListener
 import edu.austral.dissis.server.listener.InitializeListener
@@ -26,7 +26,7 @@ class GameServer(private var gameState: IGameState,
         server.start()
     }
 
-    fun getGameState() : IGameState{
+    fun getGameState() : IGameState {
         return gameState
     }
 
@@ -44,9 +44,9 @@ class GameServer(private var gameState: IGameState,
 
     }
 
-    fun applyMove(movement: Movement) : IGameState{
+    fun applyMove(movement: Movement) : IGameState {
        return when (val result = gameState.movePiece(movement)) {
-           is FinishGameState , is InvalidMoveGameState -> result
+           is FinishGameState, is InvalidMoveGameState -> result
            is GameState -> {
                this.gameState = result
                result

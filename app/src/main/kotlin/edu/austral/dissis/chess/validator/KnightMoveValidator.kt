@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.validator
 
-import edu.austral.dissis.chess.game.IGameState
+import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
 
 class KnightMoveValidator : edu.austral.dissis.common.validator.Validator {

@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.game
+package edu.austral.dissis.common.game
 
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement

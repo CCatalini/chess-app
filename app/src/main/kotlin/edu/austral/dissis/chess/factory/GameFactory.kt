@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.factory
 
-import edu.austral.dissis.chess.game.GameState
-import edu.austral.dissis.chess.game.IGameState
+import edu.austral.dissis.common.game.GameState
+import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.chess.validator.postCondition.IsNotCheckValidator
 import edu.austral.dissis.chess.validator.postCondition.PromotionValidator

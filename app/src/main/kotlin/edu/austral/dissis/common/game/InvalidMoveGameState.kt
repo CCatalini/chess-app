@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.game
+package edu.austral.dissis.common.game
 
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
@@ -8,43 +8,41 @@ import edu.austral.dissis.common.TurnValidator
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.WinCondition
 
-class FinishGameState(private val boards : List<IBoard>,
-                      private val winCondition: WinCondition,
-                      private val turnManager: TurnValidator,
-                      private val preConditions: List<Validator>,
-                      private val postConditions: List<PostConditionValidator>) : IGameState {
+class InvalidMoveGameState (private val gameState: IGameState,
+                            val errorMessage: String ) : IGameState {
 
     override fun getBoards(): List<IBoard> {
-        return boards
+        return gameState.getBoards()
     }
 
     override fun getCurrentBoard(): IBoard {
-        return boards.last()
+        return gameState.getCurrentBoard()
     }
 
     override fun getCurrentTurn(): Color {
-        return turnManager.getTurn()
+        return gameState.getCurrentTurn()
     }
 
     override fun movePiece(movement: Movement): IGameState {
-        //porque termino el juego, devolviendo es this devuelve el mismo estado
-        //santi dice que es un state pattern
-        return this
+        return gameState.movePiece(movement)
     }
 
+
+
     override fun getTurnManager(): TurnValidator {
-        return turnManager
+        return gameState.getTurnManager()
     }
 
     override fun getListPreConditions(): List<Validator> {
-        return preConditions
+        return gameState.getListPreConditions()
     }
 
     override fun getListPostConditions(): List<PostConditionValidator> {
-        return postConditions
+        return gameState.getListPostConditions()
     }
 
     override fun getWinCondition(): WinCondition {
-        return winCondition
+        return gameState.getWinCondition()
     }
+
 }

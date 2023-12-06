@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.validator
 
-import edu.austral.dissis.chess.game.IGameState
+import edu.austral.dissis.common.game.IGameState
 
 interface WinCondition {
 
