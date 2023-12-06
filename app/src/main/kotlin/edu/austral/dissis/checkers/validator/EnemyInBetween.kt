@@ -33,6 +33,7 @@ class EnemyInBetween : Validator{
     }
 
     private fun isEnemy(piece: Piece?, currentTurn: Color): Boolean{
-        return piece!!.color != currentTurn
+        if(piece == null) return false
+        return piece.color != currentTurn
     }
 }

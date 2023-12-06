@@ -32,7 +32,8 @@ class ManInitializer : PieceInitializer {
                     AndValidator(listOf(
                         DiagonalValidator(),
                         LimitedMovementValidator(1),
-                        VerticalSenseValidator(sense)
+                        VerticalSenseValidator(sense),
+                        EmptyDestinationValidator()
                     )),
 
                     // captura en diagonal, tiene que caer atrás (en diagonal) de la que se come
@@ -42,9 +43,7 @@ class ManInitializer : PieceInitializer {
                         ExactMovementValidator(2),
                         EnemyInBetween(),
                         EmptyDestinationValidator()
-                    )),
-
-                    //crown
+                    ))
 
 
                 )

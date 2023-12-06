@@ -1,6 +1,6 @@
 package edu.austral.dissis
 
-val ROWS = 15
+val ROWS = 8
 val COLUMNS = 8
 val GAME_TYPE = GameType.CHECKERS
 

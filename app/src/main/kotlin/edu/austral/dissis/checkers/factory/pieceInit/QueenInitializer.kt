@@ -31,6 +31,7 @@ class QueenInitializer : PieceInitializer {
                     AndValidator(listOf(
                         DiagonalValidator(),
                         LimitedMovementValidator(1),
+                        EmptyDestinationValidator()
                     )),
 
                     // captura en diagonal
