@@ -19,14 +19,14 @@ class PromotionValidator : PostConditionValidator{
             if ( pieceWhite!= null && isPawn(pieceWhite) && isColor(pieceWhite, Color.WHITE)) {
                 val newPiece = QueenInitializer().initialize(Color.WHITE, pieceWhite.id)
                 val valPiece = newBoard.getPieceByPosition(Position(7,i))
-                newBoard = newBoard.updatePieceByPosition(Position(7,i), valPiece!!.copy(type = PieceType.ChessPieceType.QUEEN, validator = newPiece.validator))
+                newBoard = newBoard.updatePieceByPosition(Position(7,i), valPiece!!.copy(type = PieceType.QUEEN, validator = newPiece.validator))
             }
             val pieceBlack = getPiece(Position(0,i), newBoard)
             if (pieceBlack!= null && isPawn(pieceBlack) && isColor(pieceBlack, Color.BLACK)) {
                 val newPiece = QueenInitializer().initialize(Color.BLACK, pieceBlack.id)
                 val valPiece = newBoard.getPieceByPosition(Position(0,i))
 
-                newBoard = newBoard.updatePieceByPosition(Position(0,i), valPiece!!.copy(type = PieceType.ChessPieceType.QUEEN, validator = newPiece.validator))
+                newBoard = newBoard.updatePieceByPosition(Position(0,i), valPiece!!.copy(type = PieceType.QUEEN, validator = newPiece.validator))
             }
         }
 
@@ -38,7 +38,7 @@ class PromotionValidator : PostConditionValidator{
     }
 
     private fun isPawn(piece: Piece): Boolean {
-        return piece.type == PieceType.ChessPieceType.PAWN
+        return piece.type == PieceType.PAWN
     }
 
     private fun isColor(piece: Piece, color: Color): Boolean {

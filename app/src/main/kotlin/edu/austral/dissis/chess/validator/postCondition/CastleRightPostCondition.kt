@@ -34,7 +34,7 @@ class CastleRightPostCondition: PostConditionValidator {
     }
 
     private fun findKingPosition(board: IBoard, color: Color): Position {
-        val king = board.getPieces().find { it.color == color && it.type == PieceType.ChessPieceType.KING }!!
+        val king = board.getPieces().find { it.color == color && it.type == PieceType.KING }!!
         return board.getPositionByPiece(king)!!
     }
 

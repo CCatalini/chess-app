@@ -1,12 +1,7 @@
 package edu.austral.dissis.common.piece
 
-sealed interface PieceType {
-    enum class CheckersPieceType : PieceType {
-        MAN,
-        QUEEN
-    }
 
-    enum class ChessPieceType : PieceType {
+enum class PieceType {
         PAWN,
         ROOK,
         KNIGHT,
@@ -17,5 +12,4 @@ sealed interface PieceType {
         ARCHBISHOP,
         CHANCELLOR,
         JEDIKNIGHT
-    }
 }

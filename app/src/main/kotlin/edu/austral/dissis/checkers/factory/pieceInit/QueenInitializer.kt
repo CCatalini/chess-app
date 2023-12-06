@@ -10,10 +10,9 @@ import edu.austral.dissis.common.validator.board.LimitedMovementValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
 import edu.austral.dissis.common.validator.direction.DiagonalValidator
-import edu.austral.dissis.common.validator.direction.VerticalSenseValidator
 import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 
-class KingInitializer : PieceInitializer {
+class QueenInitializer : PieceInitializer {
 
     override fun initialize(color: Color): Piece {
         val uuid = java.util.UUID.randomUUID().toString()
@@ -25,7 +24,7 @@ class KingInitializer : PieceInitializer {
 
         return Piece(id,
             color,
-            PieceType.CheckersPieceType.QUEEN,
+            PieceType.QUEEN,
             OrValidator(
                 listOf(
                     // movimiento simple en diagonal sin sentido determinado

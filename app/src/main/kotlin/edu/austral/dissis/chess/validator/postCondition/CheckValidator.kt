@@ -41,7 +41,7 @@ class CheckValidator {
     }
 
     private fun isKing(piece: Piece?): Boolean{
-        return (piece?.type == PieceType.ChessPieceType.KING)
+        return (piece?.type == PieceType.KING)
     }
 
     private fun matchesColor(piece: Piece?, color: Color): Boolean{

@@ -2,6 +2,7 @@ package edu.austral.dissis.app
 
 
 import edu.austral.dissis.checkers.factory.createCheckersNormalGame
+import edu.austral.dissis.chess.factory.createChessCapablancaGame
 import edu.austral.dissis.chess.factory.createChessNormalGame
 import edu.austral.dissis.server.gameServer.GameServer
 
@@ -9,9 +10,9 @@ import edu.austral.dissis.server.gameServer.GameServer
 
 fun main() {
 
-    GameServer(createChessNormalGame())
+   // GameServer(createChessNormalGame())
 
-  //  GameServer(createChessCapablancaGame())
+   //GameServer(createChessCapablancaGame())
 
-  // GameServer(createCheckersNormalGame())
+  GameServer(createCheckersNormalGame())
 }

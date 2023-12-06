@@ -25,7 +25,7 @@ class ManInitializer : PieceInitializer {
 
         return Piece(id,
             color,
-            PieceType.CheckersPieceType.MAN,
+            PieceType.PAWN,
             OrValidator(
                 listOf(
                     // movimiento simple en diagonal

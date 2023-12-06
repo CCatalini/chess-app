@@ -24,7 +24,7 @@ class RookInitializer : PieceInitializer {
     override fun initialize(color: Color, id: String): Piece {
         return Piece(id,
             color,
-            PieceType.ChessPieceType.ROOK,
+            PieceType.ROOK,
             AndValidator(
                 listOf(
                     LegalPositionValidator(),

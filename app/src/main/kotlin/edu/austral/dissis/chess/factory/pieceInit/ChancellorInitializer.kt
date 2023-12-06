@@ -27,7 +27,7 @@ class ChancellorInitializer : PieceInitializer {
     override fun initialize(color: Color, id: String): Piece {
         return Piece(id,
             color,
-            PieceType.ChessPieceType.CHANCELLOR,
+            PieceType.CHANCELLOR,
             AndValidator(
                 listOf(
 

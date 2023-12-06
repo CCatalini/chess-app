@@ -22,7 +22,7 @@ class BishopInitializer : PieceInitializer {
     override fun initialize(color: Color, id: String): Piece {
         return Piece(id,
             color,
-            PieceType.ChessPieceType.BISHOP,
+            PieceType.BISHOP,
             AndValidator(
                 listOf(
                     LegalPositionValidator(),

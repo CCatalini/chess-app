@@ -29,7 +29,7 @@ class PawnInitializer : PieceInitializer {
 
         return Piece(id,
             color,
-            PieceType.ChessPieceType.PAWN,
+            PieceType.PAWN,
             AndValidator(
                 listOf(
 

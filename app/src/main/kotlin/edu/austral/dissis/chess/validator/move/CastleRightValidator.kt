@@ -13,7 +13,7 @@ class CastleRightValidator: Validator {
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
 
         val board = gameState.getCurrentBoard()
-        if (board.getPieceByPosition(movement.from)!!.type != PieceType.ChessPieceType.KING) return ValidatorResponse.ValidatorResultInvalid("La pieza que estas moviendo no es un rey")
+        if (board.getPieceByPosition(movement.from)!!.type != PieceType.KING) return ValidatorResponse.ValidatorResultInvalid("La pieza que estas moviendo no es un rey")
 
         if (movement.to.row != movement.from.row) return ValidatorResponse.ValidatorResultInvalid("El rey solo se puede mover en horizontal (Para el enroque)")
 

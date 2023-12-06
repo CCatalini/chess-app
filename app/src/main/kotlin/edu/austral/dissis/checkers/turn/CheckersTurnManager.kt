@@ -6,17 +6,17 @@ import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.TurnValidator
 import edu.austral.dissis.common.validator.ValidatorResponse
 
-class CheckersTurnManager(white: Color) : TurnValidator {
+class CheckersTurnManager(private val color: Color) : TurnValidator {
     override fun getTurn(): Color {
-        TODO("Not yet implemented")
+        return color
     }
 
     override fun nextTurn(): TurnValidator {
-        TODO("Not yet implemented")
+        return this
     }
 
     override fun validateTurn(movement: Movement, gameState: IGameState): ValidatorResponse {
-        TODO("Not yet implemented")
+        return ValidatorResponse.ValidatorResultValid("nashei")
     }
 
 }
