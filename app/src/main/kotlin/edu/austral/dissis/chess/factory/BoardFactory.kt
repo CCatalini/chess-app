@@ -1,5 +1,7 @@
 package edu.austral.dissis.chess.factory
 
+import edu.austral.dissis.COLUMNS
+import edu.austral.dissis.ROWS
 import edu.austral.dissis.chess.factory.pieceInit.*
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
@@ -38,7 +40,7 @@ fun createClassicChessBoard(): IBoard {
         map = map.plus(Position(6, i) to PawnInitializer().initialize(Color.BLACK))
     }
 
-    return Board(8, 8, map)
+    return Board(getWidth(8), getHeight(8), map)
 }
 
 fun createCapablancaChessBoard(): IBoard {
@@ -77,7 +79,7 @@ fun createCapablancaChessBoard(): IBoard {
         map = map.plus(Position(8, i) to PawnInitializer().initialize(Color.BLACK))
     }
 
-    return Board(10, 10, map)
+    return Board(getWidth(10), getHeight(10), map)
 }
 
 fun createRookTestBoard(): IBoard {
@@ -123,3 +125,11 @@ fun createQueenTestBoard(): IBoard {
     return Board(8, 8, map)
 }
 
+
+private fun getWidth( minSize: Int): Int {
+    return if(ROWS < minSize) minSize else ROWS
+}
+
+private fun getHeight(minSize: Int): Int {
+    return if (COLUMNS < minSize) minSize else COLUMNS
+}
