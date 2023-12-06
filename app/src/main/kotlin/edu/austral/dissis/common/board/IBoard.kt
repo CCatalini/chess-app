@@ -16,4 +16,6 @@ interface IBoard {
 
     fun getPieces(): List<Piece>
 
+    fun updatePieceByPosition(position: Position, piece: Piece): IBoard
+
 }

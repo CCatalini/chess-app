@@ -47,4 +47,10 @@ class Board(private val width: Int,
     override fun getPieces(): List<Piece> {
         return piecePositions.values.toList()
     }
+
+    override fun updatePieceByPosition(position: Position, piece: Piece): IBoard {
+        val newPiecePositions = piecePositions.toMutableMap()
+        newPiecePositions[position] = piece
+        return Board(width, height, newPiecePositions)
+    }
 }

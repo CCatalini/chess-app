@@ -13,21 +13,27 @@ class PromotionValidator : PostConditionValidator{
 
     override fun validate(gameState: IGameState, board: IBoard): PostConditionResult {
 
-        val map = board.getPiecesPositions().toMutableMap()
+        var newBoard = board
 
         for(i in 0..7) {
             val pieceWhite = getPiece(Position(7,i), gameState)
             if ( pieceWhite!= null && isPawn(pieceWhite) && isColor(pieceWhite, Color.WHITE)) {
-                map[Position(7,i)]= QueenInitializer().initialize(Color.WHITE, pieceWhite.id)
+                val newPiece = QueenInitializer().initialize(Color.WHITE, pieceWhite.id)
+                val valPiece = newBoard.getPieceByPosition(Position(7,i))
+
+                newBoard = newBoard.updatePieceByPosition(Position(7,i), valPiece!!.copy(type = PieceType.ChessPieceType.QUEEN, validator = newPiece.validator))
             }
             val pieceBlack = getPiece(Position(0,i), gameState)
             if (pieceBlack!= null && isPawn(pieceBlack) && isColor(pieceBlack, Color.BLACK)) {
-                map[Position(0,i)]= QueenInitializer().initialize(Color.BLACK, pieceBlack.id)
+                val newPiece = QueenInitializer().initialize(Color.BLACK, pieceBlack.id)
+                val valPiece = newBoard.getPieceByPosition(Position(0,i))
+
+                newBoard = newBoard.updatePieceByPosition(Position(0,i), valPiece!!.copy(type = PieceType.ChessPieceType.QUEEN, validator = newPiece.validator))
             }
         }
 
 
-        return PostConditionResult.ResultValid(Board(gameState.getCurrentBoard().getWidth(), gameState.getCurrentBoard().getHeight(), map))
+        return PostConditionResult.ResultValid(newBoard)
     }
 
     private fun getPiece(position: Position, gameState: IGameState): Piece? {
