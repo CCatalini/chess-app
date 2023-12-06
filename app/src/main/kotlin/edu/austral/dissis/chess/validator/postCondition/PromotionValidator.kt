@@ -4,7 +4,6 @@ import edu.austral.dissis.chess.factory.pieceInit.QueenInitializer
 import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
-import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.piece.PieceType

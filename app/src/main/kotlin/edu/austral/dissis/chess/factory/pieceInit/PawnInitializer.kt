@@ -9,7 +9,7 @@ import edu.austral.dissis.common.validator.board.LimitedMovementValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
 import edu.austral.dissis.common.validator.direction.DiagonalValidator
-import edu.austral.dissis.common.validator.direction.StraightSenseValidator
+import edu.austral.dissis.common.validator.direction.VerticalSenseValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
 import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 import edu.austral.dissis.common.validator.obstacle.StraightEmptyPathValidator
@@ -45,7 +45,7 @@ class PawnInitializer : PieceInitializer {
                                     LimitedMovementValidator(1),
                                     EmptyDestinationValidator(),
 
-                                    StraightSenseValidator(sense)
+                                    VerticalSenseValidator(sense)
                                 )
                             ),
 
@@ -57,7 +57,7 @@ class PawnInitializer : PieceInitializer {
                                     LimitedMovementValidator(2),
                                     EmptyDestinationValidator(),
 
-                                    StraightSenseValidator(sense)
+                                    VerticalSenseValidator(sense)
 
                                 )
                             ),

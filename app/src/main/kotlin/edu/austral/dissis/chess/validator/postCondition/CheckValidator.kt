@@ -8,7 +8,6 @@ import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.ValidatorResponse
-import edu.austral.dissis.common.validator.ValidatorResponse.ValidatorResultValid
 
 //para ver si mis piezas me dejan en check
 class CheckValidator {
