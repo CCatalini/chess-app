@@ -13,6 +13,7 @@ interface IBoard {
     fun getPiecesPositions(): Map<Position, Piece>
     fun update(movement: Movement): IBoard
     fun getOccupiedPositions(): List<Position>
+    fun removePieceByPosition(position: Position): IBoard
 
     fun getPieces(): List<Piece>
 

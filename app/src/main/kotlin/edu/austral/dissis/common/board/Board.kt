@@ -44,6 +44,12 @@ class Board(private val width: Int,
         return piecePositions.keys.toList()
     }
 
+    override fun removePieceByPosition(position: Position): IBoard {
+        val newPiecePositions = piecePositions.toMutableMap()
+        newPiecePositions.remove(position)
+        return Board(width, height, newPiecePositions)
+    }
+
     override fun getPieces(): List<Piece> {
         return piecePositions.values.toList()
     }

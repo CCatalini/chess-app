@@ -1,10 +1,17 @@
 package edu.austral.dissis.checkers.factory.pieceInit
 
+import edu.austral.dissis.checkers.validator.EnemyInBetween
 import edu.austral.dissis.chess.factory.PieceInitializer
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
+import edu.austral.dissis.common.validator.board.ExactMovementValidator
+import edu.austral.dissis.common.validator.board.LimitedMovementValidator
 import edu.austral.dissis.common.validator.composition.AndValidator
+import edu.austral.dissis.common.validator.composition.OrValidator
+import edu.austral.dissis.common.validator.direction.DiagonalValidator
+import edu.austral.dissis.common.validator.direction.VerticalSenseValidator
+import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 
 class KingInitializer : PieceInitializer {
 
@@ -18,10 +25,27 @@ class KingInitializer : PieceInitializer {
 
         return Piece(id,
             color,
-            PieceType.CheckersPieceType.KING,
-            AndValidator(listOf(
+            PieceType.CheckersPieceType.QUEEN,
+            OrValidator(
+                listOf(
+                    // movimiento simple en diagonal sin sentido determinado
+                    AndValidator(listOf(
+                        DiagonalValidator(),
+                        LimitedMovementValidator(1),
+                    )),
 
-            ))
+                    // captura en diagonal
+                    AndValidator(listOf(
+                        DiagonalValidator(),
+                        ExactMovementValidator(2),
+                        EnemyInBetween(),
+                        EmptyDestinationValidator()
+                    )),
+
+
+                )
+            )
         )
+
     }
 }

@@ -3,7 +3,7 @@ package edu.austral.dissis.common.piece
 sealed interface PieceType {
     enum class CheckersPieceType : PieceType {
         MAN,
-        KING
+        QUEEN
     }
 
     enum class ChessPieceType : PieceType {

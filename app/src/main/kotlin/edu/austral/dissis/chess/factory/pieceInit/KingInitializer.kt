@@ -1,6 +1,8 @@
 package edu.austral.dissis.chess.factory.pieceInit
 
 import edu.austral.dissis.chess.factory.PieceInitializer
+import edu.austral.dissis.chess.validator.move.CastleLeftValidator
+import edu.austral.dissis.chess.validator.move.CastleRightValidator
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
@@ -36,18 +38,25 @@ class KingInitializer : PieceInitializer {
                     ),
                     OrValidator(
                         listOf(
-                            StraightValidator(),
-                            DiagonalValidator(), // TODO -> LIMITE
-                            HorizontalValidator()
-
+                            AndValidator(
+                                listOf(
+                                    LimitedMovementValidator(1),
+                                    OrValidator(
+                                        listOf(
+                                            StraightValidator(),
+                                            DiagonalValidator(), // TODO -> LIMITE
+                                            HorizontalValidator(),
+                                        )
+                                    )
+                                )
+                            ),
+                            CastleRightValidator(),
+                            CastleLeftValidator()
                         )
                     ),
-
-                    LimitedMovementValidator(1)
                 )
             )
 
         )
     }
 }
-
