@@ -28,10 +28,10 @@ import edu.austral.dissis.common.piece.Piece
             }
         }
 
+
+        // agregados caseritos para no tocar el for jujuju
         map[Position(7,0)]= ManInitializer().initialize(Color.BLACK)
         map[Position(5,0)]= ManInitializer().initialize(Color.BLACK)
-
-
 
         return Board(getWidth(8), getHeight(8), map)
     }

@@ -1,16 +1,12 @@
 package edu.austral.dissis.checkers.factory.pieceInit
 
-import edu.austral.dissis.checkers.validator.EnemyInBetween
+import edu.austral.dissis.checkers.factory.diagonalCapture
+import edu.austral.dissis.checkers.factory.simpleDiagonalMove
 import edu.austral.dissis.chess.factory.PieceInitializer
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
-import edu.austral.dissis.common.validator.board.ExactMovementValidator
-import edu.austral.dissis.common.validator.board.LimitedMovementValidator
-import edu.austral.dissis.common.validator.composition.AndValidator
 import edu.austral.dissis.common.validator.composition.OrValidator
-import edu.austral.dissis.common.validator.direction.DiagonalValidator
-import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
 
 class QueenInitializer : PieceInitializer {
 
@@ -20,28 +16,14 @@ class QueenInitializer : PieceInitializer {
     }
 
     override fun initialize(color: Color, id: String): Piece {
-        val sense = if (color == Color.WHITE) 1 else -1
-
         return Piece(id,
             color,
             PieceType.QUEEN,
             OrValidator(
                 listOf(
                     // movimiento simple en diagonal sin sentido determinado
-                    AndValidator(listOf(
-                        DiagonalValidator(),
-                        LimitedMovementValidator(1),
-                        EmptyDestinationValidator()
-                    )),
-
-                    // captura en diagonal
-                    AndValidator(listOf(
-                        DiagonalValidator(),
-                        ExactMovementValidator(2),
-                        EnemyInBetween(),
-                        EmptyDestinationValidator()
-                    )),
-
+                    simpleDiagonalMove(),
+                    diagonalCapture()
 
                 )
             )

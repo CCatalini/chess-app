@@ -10,17 +10,20 @@ import edu.austral.dissis.common.validator.TurnValidator
 import edu.austral.dissis.common.validator.ValidatorResponse
 
 class CheckersTurnManager(private val color: Color, private val posibleMoves: List<Movement>) : TurnValidator {
+
     override fun getTurn(): Color {
         return color
     }
 
     override fun nextTurn(gameState: IGameState): TurnValidator {
         return if (canCapture(gameState) && hasEatenMove(gameState)) {
-            nextTurnWithCapture(gameState)
+            nextTurnWithCapture(gameState) // validador del turno(sin cambiar) con una lista de los próximos posibles movimientos
         } else {
-            nextTurnWithoutCapture()
+            nextTurnWithoutCapture() // cambia el jugador
         }
     }
+
+
 
     private fun hasEatenMove(gameState: IGameState): Boolean {
         val board = gameState.getCurrentBoard()
@@ -35,7 +38,8 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
     }
 
     private fun nextTurnWithCapture(gameState: IGameState): TurnValidator {
-        val movement = getLatestMovement(gameState.getBoards()[gameState.getBoards().size - 2], gameState.getCurrentBoard())
+        val previousBoard: IBoard = gameState.getBoards()[gameState.getBoards().size - 2]
+        val movement = getLatestMovement(previousBoard, gameState.getCurrentBoard())
         val newPosibleMoves = getPosibleEatenMovesByPosition(movement.to, gameState)
 
         return if (newPosibleMoves.isNotEmpty()) {
@@ -69,9 +73,6 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
     }
 
     private fun getPosibleEatenMovesByPosition(pos: Position, gameState: IGameState): List<Movement> {
-        val board = gameState.getCurrentBoard()
-        val piece = board.getPieceByPosition(pos) ?: return listOf()
-        val pieceColor = piece.color
         val posibleEatenMoves = mutableListOf<Movement>()
         val posibleMoves = getPosibleMovesByPosition(pos, gameState)
         for (move in posibleMoves) {
@@ -111,21 +112,6 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         return Movement(positionFrom!!, positionTo)
     }
 
-    private fun getPosibleEatenMoves(pieceColor: Color, gameState: IGameState): List<Movement> {
-        val board = gameState.getCurrentBoard()
-
-        val positionsPiecesByColor = board.getOccupiedPositions().filter { board.getPieceByPosition(it)?.color == pieceColor }
-        val posibleEatenMoves = mutableListOf<Movement>()
-        for (position in positionsPiecesByColor) {
-            val posibleMoves = getPosibleMovesByPosition (position, gameState)
-            for (move in posibleMoves) {
-                if (isEatingMovement(move, gameState )) {
-                    posibleEatenMoves.add(move)
-                }
-            }
-        }
-        return posibleEatenMoves
-    }
 
     private fun isEatingMovement(move: Movement, gameState: IGameState): Boolean {
         val board = gameState.getCurrentBoard()

@@ -13,25 +13,34 @@ class HasEatenValidator : PostConditionValidator {
         val previousBoard = gameState.getCurrentBoard()
         val latestMovement = getLatestMovement(previousBoard, updatedBoard)
 
-        if ( !isEatingMovement(latestMovement) ) {
+        if ( !isEatingMovement(latestMovement) )
             return PostConditionResult.ResultInvalid("No se ha comido ninguna pieza")
-        }
+
         val board = updateEatenBoard(updatedBoard, latestMovement)
 
         return PostConditionResult.ResultValid(board)
     }
 
 
-
+    // agarra el último movimiento que se hizo comparando los tableros antes de mover y después de mover
     private fun getLatestMovement(previousBoard: IBoard, updatedBoard: IBoard): Movement {
-        val previousBoardPieces = previousBoard.getOccupiedPositions()
-        val updatedBoardPieces = updatedBoard.getOccupiedPositions() //piezas post movimiento
+        //posiciones ocupadas de los tableros
+        val previousBoardPieces : List<Position> = previousBoard.getOccupiedPositions()
+        val updatedBoardPieces : List<Position> = updatedBoard.getOccupiedPositions()
 
-        val positionTo = updatedBoardPieces.first { !previousBoardPieces.contains(it) }
+        val positionTo = getPositionTo(previousBoardPieces, updatedBoardPieces)
         val piece = updatedBoard.getPieceByPosition(positionTo)
 
         val positionFrom = previousBoard.getPositionByPiece(piece!!)
         return Movement(positionFrom!!, positionTo)
+    }
+
+    private fun getPositionTo( previousBoardPieces : List<Position>, updatedBoardPieces: List<Position>): Position {
+        return updatedBoardPieces.first { !previousBoardPieces.contains(it) }
+    }
+
+    private fun isEatingMovement(latestMovement: Movement): Boolean {
+        return kotlin.math.abs(latestMovement.from.row - latestMovement.to.row) == 2
     }
 
     private fun updateEatenBoard(updatedBoard: IBoard, latestMovement: Movement): IBoard {
@@ -40,11 +49,11 @@ class HasEatenValidator : PostConditionValidator {
     }
 
     private fun getEatenPosition(latestMovement: Movement): Position {
+        // para agarrar la posición de la pieza que hay que sacar
         val row = latestMovement.from.row + getRowSense(latestMovement)
         val column = latestMovement.from.column + getColumnSense(latestMovement)
         return Position(row, column)
     }
-
 
     private fun getRowSense(latestMovement: Movement): Int {
         return when {
@@ -62,9 +71,7 @@ class HasEatenValidator : PostConditionValidator {
         }
     }
 
-    private fun isEatingMovement(latestMovement: Movement): Boolean {
-        return kotlin.math.abs(latestMovement.from.row - latestMovement.to.row) == 2
-    }
+
 
 
 }
