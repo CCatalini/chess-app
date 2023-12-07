@@ -1,11 +1,11 @@
 package edu.austral.dissis.checkers.validator.postCondition
 
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.common.validator.postCondition.PostConditionResult
-import edu.austral.dissis.common.validator.postCondition.PostConditionValidator
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.game.IGameState
+import edu.austral.dissis.common.validator.postCondition.PostConditionResult
+import edu.austral.dissis.common.validator.postCondition.PostConditionValidator
 
 class HasEatenValidator : PostConditionValidator {
 

@@ -23,22 +23,51 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         }
     }
 
+    override fun validateTurn(movement: Movement, gameState: IGameState): ValidatorResponse {
+        val pieceToMove: Piece? = getPiece(movement, gameState)
+
+        if (isNotAvailableMove(movement)) {
+            return ValidatorResponse.ValidatorResultInvalid("tenes que mover una pieza que pueda comer y que haya comido" )
+        }
+        if (pieceToMove != null) {
+            if (isSameColor(pieceToMove.color, color)) {
+                return ValidatorResponse.ValidatorResultValid("Es tu turno")
+            }
+        }
+        return ValidatorResponse.ValidatorResultInvalid("No es tu turno capo")
+    }
 
 
     private fun hasEatenMove(gameState: IGameState): Boolean {
         val board = gameState.getCurrentBoard()
-        if (gameState.getBoards().size < 2) { //porque mínimo tuvo que haber movido 2 veces
+        if (hasMove(gameState)) { //porque mínimo tuvo que haber movido 2 veces
             return false
         }
-        val previousBoard = gameState.getBoards()[gameState.getBoards().size - 2]
+        val previousBoard = getPreviousBoard(gameState)
         val movement = getLatestMovement(previousBoard, board)
         val previousPiece = previousBoard.getPieceByPosition(movement.from) ?: return false
         val previousColor = previousPiece.color
-        return previousBoard.getOccupiedPositions().size > board.getOccupiedPositions().size && previousColor == color
+        return previousBoardHasMorePieces(previousBoard, board) && isSameColor(previousColor, color)
+    }
+
+    private fun hasMove(gameState: IGameState): Boolean{
+       return  gameState.getBoards().size < 2
+    }
+
+    private fun getPreviousBoard(gameState: IGameState): IBoard {
+        return gameState.getBoards()[gameState.getBoards().size - 2]
+    }
+
+    private fun isSameColor(previousColor: Color, color: Color): Boolean{
+        return previousColor == color
+    }
+
+    private fun previousBoardHasMorePieces(previousBoard: IBoard, board: IBoard): Boolean{
+        return previousBoard.getOccupiedPositions().size > board.getOccupiedPositions().size
     }
 
     private fun nextTurnWithCapture(gameState: IGameState): TurnValidator {
-        val previousBoard: IBoard = gameState.getBoards()[gameState.getBoards().size - 2]
+        val previousBoard: IBoard = getPreviousBoard(gameState)
         val movement = getLatestMovement(previousBoard, gameState.getCurrentBoard())
         val newPosibleMoves = getPosibleEatenMovesByPosition(movement.to, gameState)
 
@@ -83,18 +112,10 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         return posibleEatenMoves
     }
 
-    override fun validateTurn(movement: Movement, gameState: IGameState): ValidatorResponse {
-        val pieceToMove: Piece? = getPiece(movement, gameState)
 
-        if (posibleMoves.isNotEmpty() && !posibleMoves.contains(movement)) {
-            return ValidatorResponse.ValidatorResultInvalid("tenes que mover una pieza que pueda comer y que haya comido" )
-        }
-        if (pieceToMove != null) {
-            if (pieceToMove.color == this.color) {
-                return ValidatorResponse.ValidatorResultValid("Es tu turno")
-            }
-        }
-        return ValidatorResponse.ValidatorResultInvalid("No es tu turno capo")
+
+    private fun isNotAvailableMove(movement: Movement) : Boolean{
+        return posibleMoves.isNotEmpty() && !posibleMoves.contains(movement)
     }
 
     private fun getPiece (movement: Movement, gameState: IGameState): Piece? {
@@ -105,13 +126,16 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         val previousBoardPieces = previousBoard.getOccupiedPositions()
         val updatedBoardPieces = updatedBoard.getOccupiedPositions() //piezas post movimiento
 
-        val positionTo = updatedBoardPieces.first { !previousBoardPieces.contains(it) }
+        val positionTo = findDestination(previousBoardPieces, updatedBoardPieces)
         val piece = updatedBoard.getPieceByPosition(positionTo)
 
         val positionFrom = previousBoard.getPositionByPiece(piece!!)
         return Movement(positionFrom!!, positionTo)
     }
 
+    private fun findDestination (previousBoardPieces: List<Position>, updatedBoardPieces: List<Position>): Position {
+        return updatedBoardPieces.first { !previousBoardPieces.contains(it) }
+    }
 
     private fun isEatingMovement(move: Movement, gameState: IGameState): Boolean {
         val board = gameState.getCurrentBoard()
@@ -124,15 +148,22 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         val posibleMoves = mutableListOf<Movement>()
         val row = position.row
         val column = position.column
-        val posiblePositions = listOf(Position(row + 2, column + 2), Position(row + 2, column - 2), Position(row - 2, column + 2), Position(row - 2, column - 2))
+        val posiblePositions = getPosiblePositions(row, column)
         val rows = gameState.getCurrentBoard().getHeight()
         val columns = gameState.getCurrentBoard().getWidth()
-        val validatedPossiblePositions = posiblePositions.filter { it.row in 0..rows && it.column in 0..columns }
+        val validatedPossiblePositions = findValidPosition(posiblePositions, rows, columns)
         for (posiblePosition in validatedPossiblePositions) {
             posibleMoves.add(Movement(position, posiblePosition))
         }
         return posibleMoves
     }
 
+    private fun findValidPosition(posiblePositions: List<Position>, rows: Int, columns: Int): List<Position> {
+        return posiblePositions.filter { it.row in 0..rows && it.column in 0..columns }
+    }
+
+    private fun getPosiblePositions(row: Int, column: Int): List<Position> {
+        return listOf(Position(row + 2, column + 2), Position(row + 2, column - 2), Position(row - 2, column + 2), Position(row - 2, column - 2))
+    }
 
 }
