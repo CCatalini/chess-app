@@ -7,9 +7,8 @@ import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
-import edu.austral.dissis.common.validator.composition.AndValidator
 
-class CastleRightValidator: Validator {
+class ShortCastleValidator: Validator {
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
 
         val board = gameState.getCurrentBoard()
@@ -20,7 +19,6 @@ class CastleRightValidator: Validator {
         if (movement.to.column != movement.from.column + 2 ) return ValidatorResponse.ValidatorResultInvalid("El rey solo se puede mover dos casillas a la derecha (Para el enroque)")
 
         if (!noPiecesBetweenCastling(board, movement)) return ValidatorResponse.ValidatorResultInvalid("No hay piezas entre el rey y la torre")
-        val rook = board.getPieceByPosition(Position(movement.from.row,movement.from.column + 3)) ?: return ValidatorResponse.ValidatorResultInvalid("No hay torre en la posicion indicada")
 
         return ValidatorResponse.ValidatorResultValid("proceda!")
     }

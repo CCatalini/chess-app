@@ -1,20 +1,19 @@
 package edu.austral.dissis.chess.factory.pieceInit
 
 import edu.austral.dissis.chess.factory.PieceInitializer
-import edu.austral.dissis.chess.validator.move.CastleLeftValidator
-import edu.austral.dissis.chess.validator.move.CastleRightValidator
+import edu.austral.dissis.chess.factory.destinationPosition
+import edu.austral.dissis.chess.validator.move.LongCastleValidator
+import edu.austral.dissis.chess.validator.move.ShortCastleValidator
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
-import edu.austral.dissis.common.validator.composition.AndValidator
-import edu.austral.dissis.common.validator.composition.OrValidator
 import edu.austral.dissis.common.validator.board.LegalPositionValidator
 import edu.austral.dissis.common.validator.board.LimitedMovementValidator
+import edu.austral.dissis.common.validator.composition.AndValidator
+import edu.austral.dissis.common.validator.composition.OrValidator
 import edu.austral.dissis.common.validator.direction.DiagonalValidator
 import edu.austral.dissis.common.validator.direction.HorizontalValidator
 import edu.austral.dissis.common.validator.direction.StraightValidator
-import edu.austral.dissis.common.validator.obstacle.EmptyDestinationValidator
-import edu.austral.dissis.common.validator.piece.IsEnemyValidator
 
 class KingInitializer : PieceInitializer {
 
@@ -30,12 +29,7 @@ class KingInitializer : PieceInitializer {
             AndValidator(
                 listOf(
                     LegalPositionValidator(),
-                    OrValidator(
-                        listOf(
-                            IsEnemyValidator(),
-                            EmptyDestinationValidator()
-                        )
-                    ),
+                    destinationPosition(),
                     OrValidator(
                         listOf(
                             AndValidator(
@@ -44,14 +38,14 @@ class KingInitializer : PieceInitializer {
                                     OrValidator(
                                         listOf(
                                             StraightValidator(),
-                                            DiagonalValidator(), // TODO -> LIMITE
+                                            DiagonalValidator(),
                                             HorizontalValidator(),
                                         )
                                     )
                                 )
                             ),
-                            CastleRightValidator(),
-                            CastleLeftValidator()
+                            ShortCastleValidator(),
+                            LongCastleValidator()
                         )
                     ),
                 )

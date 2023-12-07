@@ -7,9 +7,8 @@ import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
-import edu.austral.dissis.common.validator.composition.AndValidator
 
-class CastleLeftValidator: Validator {
+class LongCastleValidator: Validator {
     override fun validate(movement: Movement, gameState: IGameState): ValidatorResponse {
 
         val board = gameState.getCurrentBoard()

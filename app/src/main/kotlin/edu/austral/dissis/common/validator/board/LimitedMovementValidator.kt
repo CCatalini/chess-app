@@ -5,7 +5,6 @@ import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
 
-
 // Clase para especificar cuantas casillas puede moverse una pieza
 // Respeta un rango menor o igual al máximo establecido
 class LimitedMovementValidator( private val maxMoveQuantity: Int ) : Validator {

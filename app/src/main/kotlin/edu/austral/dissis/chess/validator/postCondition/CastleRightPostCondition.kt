@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.validator.postCondition
 
 import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.chess.validator.move.CastleRightValidator
+import edu.austral.dissis.chess.validator.move.ShortCastleValidator
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
@@ -12,11 +12,11 @@ import edu.austral.dissis.common.validator.ValidatorResponse
 
 class CastleRightPostCondition: PostConditionValidator {
 
-    private val castleRightValidator: Validator = CastleRightValidator()
+    private val shortCastleValidator: Validator = ShortCastleValidator()
 
     override fun validate(gameState: IGameState, updatedBoard: IBoard): PostConditionResult {
         val movement = findMovement(gameState, updatedBoard)
-        if (castleRightValidator.validate(movement, gameState) is ValidatorResponse.ValidatorResultInvalid) return PostConditionResult.ResultInvalid("No se puede realizar el enroque")
+        if (shortCastleValidator.validate(movement, gameState) is ValidatorResponse.ValidatorResultInvalid) return PostConditionResult.ResultInvalid("No se puede realizar el enroque")
         val newBoard = updateRookPosition(updatedBoard, movement)
         return PostConditionResult.ResultValid(newBoard)
     }
