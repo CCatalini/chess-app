@@ -1,7 +1,7 @@
 package edu.austral.dissis.common.validator.board
 
 import edu.austral.dissis.common.game.IGameState
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 
 /** Clase para validar que el movimiento caiga dentro del tablero. */
 class LegalPositionValidator : edu.austral.dissis.common.validator.Validator {

@@ -7,7 +7,7 @@ import edu.austral.dissis.common.game.GameState
 import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.game.InvalidMoveGameState
 import edu.austral.dissis.chess.gui.*
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.Color
 
 class Adapter(private var gameState: IGameState) : GameEngine {
@@ -55,7 +55,7 @@ class Adapter(private var gameState: IGameState) : GameEngine {
         return BoardSize(board.getWidth(), board.getHeight())
     }
 
-     private fun parseMove(move:Move ) : Movement{
+     private fun parseMove(move:Move ) : Movement {
         val from = Position(move.from.row - 1 , move.from.column - 1)
         val to  = Position(move.to.row - 1 , move.to.column -1 )
         return Movement(from, to)

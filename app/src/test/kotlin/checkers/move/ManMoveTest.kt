@@ -1,7 +1,7 @@
 package checkers.move
 
 import edu.austral.dissis.checkers.factory.createCheckersNormalGame
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.game.IGameState
 import org.junit.Test
@@ -30,7 +30,9 @@ class ManMoveTest {
 
     @Test
     fun `eat`() {
-        val afterMove = initialGameState.movePiece(Movement(Position(2, 1), Position(3, 2))).movePiece(Movement(Position(5, 4), Position(4, 3))).movePiece(Movement(Position(3, 2), Position(5, 4)))
+        val afterMove = initialGameState.movePiece(Movement(Position(2, 1), Position(3, 2))).movePiece(Movement(Position(5, 4), Position(4, 3))).movePiece(
+            Movement(Position(3, 2), Position(5, 4))
+        )
         assert(afterMove.getCurrentBoard().getPieceByPosition(Position(3, 2)) == null)
     }
 }

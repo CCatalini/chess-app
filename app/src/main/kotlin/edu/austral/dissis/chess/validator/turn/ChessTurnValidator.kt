@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.validator.turn
 
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.validator.TurnValidator
 import edu.austral.dissis.common.game.IGameState

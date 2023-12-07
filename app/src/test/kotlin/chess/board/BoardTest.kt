@@ -2,7 +2,7 @@ package chess.board
 
 import edu.austral.dissis.chess.factory.pieceInit.PawnInitializer
 import edu.austral.dissis.chess.factory.pieceInit.RookInitializer
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.board.Board
 import edu.austral.dissis.common.board.Position

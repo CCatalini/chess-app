@@ -1,7 +1,7 @@
 package chess.winCondition
 
 import edu.austral.dissis.chess.factory.createChessNormalGame
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.chess.validator.winCondition.CheckMateValidator
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.game.IGameState

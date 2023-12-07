@@ -1,11 +1,11 @@
 package edu.austral.dissis.server.gameServer
 
 import com.fasterxml.jackson.core.type.TypeReference
-import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.game.FinishGameState
 import edu.austral.dissis.common.game.GameState
 import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.game.InvalidMoveGameState
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.server.listener.InitializeListener
 import edu.austral.dissis.server.listener.MovementListener
 import edu.austral.dissis.server.payload.GameStatePayload

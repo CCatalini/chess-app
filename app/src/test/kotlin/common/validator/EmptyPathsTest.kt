@@ -3,7 +3,7 @@ package common.validator
 import edu.austral.dissis.chess.factory.pieceInit.KnightInitializer
 import edu.austral.dissis.chess.factory.pieceInit.RookInitializer
 import edu.austral.dissis.common.game.GameState
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.chess.validator.turn.ChessTurnValidator

@@ -1,7 +1,7 @@
 package edu.austral.dissis.common.validator.direction
 
 import edu.austral.dissis.common.game.IGameState
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import kotlin.math.abs
 
 /** Clase para verificar que el movimiento de una pieza es diagonal*/

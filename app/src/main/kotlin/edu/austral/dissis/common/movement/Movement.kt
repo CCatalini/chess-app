@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.movement
+package edu.austral.dissis.common.movement
 
 import edu.austral.dissis.common.board.Position
 

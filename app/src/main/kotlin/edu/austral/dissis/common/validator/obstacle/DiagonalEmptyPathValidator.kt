@@ -2,7 +2,7 @@ package edu.austral.dissis.common.validator.obstacle
 
 import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.board.Position
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
 import kotlin.math.abs

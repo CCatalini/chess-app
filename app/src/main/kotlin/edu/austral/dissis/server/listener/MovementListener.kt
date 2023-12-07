@@ -1,7 +1,7 @@
 package edu.austral.dissis.server.listener
 
 import edu.austral.dissis.adapter.Adapter
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.game.FinishGameState
 import edu.austral.dissis.common.game.GameState
 import edu.austral.dissis.common.game.IGameState

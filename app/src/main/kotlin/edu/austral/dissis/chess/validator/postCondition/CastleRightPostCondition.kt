@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.validator.postCondition
 
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.chess.validator.move.ShortCastleValidator
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.board.IBoard

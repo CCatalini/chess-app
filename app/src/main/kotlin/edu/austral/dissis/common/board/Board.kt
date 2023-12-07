@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.board
 
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.common.piece.Piece
 
 class Board(private val width: Int,

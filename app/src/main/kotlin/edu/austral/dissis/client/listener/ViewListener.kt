@@ -2,7 +2,7 @@ package edu.austral.dissis.client.listener
 
 import edu.austral.dissis.chess.gui.GameEventListener
 import edu.austral.dissis.chess.gui.Move
-import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.client.GameClient
 import edu.austral.dissis.common.board.Position
 
