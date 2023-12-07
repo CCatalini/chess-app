@@ -1,9 +1,9 @@
 package edu.austral.dissis.chess.validator.turn
 
-import edu.austral.dissis.common.TurnValidator
-import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.TurnValidator
+import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.validator.ValidatorResponse
 
@@ -13,7 +13,7 @@ class ChessTurnValidator(private val current: Color) : TurnValidator {
         return current
     }
 
-    override fun nextTurn(): TurnValidator {
+    override fun nextTurn(gameState: IGameState): TurnValidator {
         return if (current == Color.WHITE) {
             ChessTurnValidator(Color.BLACK)
         } else {

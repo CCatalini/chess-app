@@ -2,6 +2,7 @@ package checkers.board
 
 import edu.austral.dissis.checkers.factory.createCheckersBoard
 import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.piece.PieceType
 import org.junit.Assert
@@ -10,20 +11,27 @@ import org.junit.Test
 class BoardFactoryTest {
 
     @Test
-    fun create() {
-        val checkersBoard = createCheckersBoard()
+    fun createBoard() {
+        val checkersBoard: IBoard = createCheckersBoard()
 
-        // Assuming that ManInitializer().initialize(Color.WHITE) creates a Man piece for White player
-        Assert.assertEquals(Color.WHITE, checkersBoard.getPieceByPosition(Position(1, 2))?.color)
-        Assert.assertEquals(PieceType.PAWN, checkersBoard.getPieceByPosition(Position(1, 2))?.type)
+        for (i in 0..2) {
+            val startColumn =
+                if (i % 2 == 0) 1 else 0
+            for (j in startColumn..7 step 2) {
+                Assert.assertEquals(Color.WHITE, checkersBoard.getPieceByPosition(Position(i, j))?.color)
+                Assert.assertEquals(PieceType.PAWN, checkersBoard.getPieceByPosition(Position(i, j))?.type)
+            }
+        }
 
-        Assert.assertEquals(Color.BLACK, checkersBoard.getPieceByPosition(Position(6, 1))?.color)
-        Assert.assertEquals(PieceType.PAWN, checkersBoard.getPieceByPosition(Position(6, 1))?.type)
-
-        // Assuming that ManInitializer().initialize(Color.BLACK) creates a Man piece for Black player
-        Assert.assertEquals(Color.BLACK, checkersBoard.getPieceByPosition(Position(8, 8))?.color)
-        Assert.assertEquals(PieceType.PAWN, checkersBoard.getPieceByPosition(Position(8, 8))?.type)
-
-        // Add more assertions as needed for your specific checkers board setup
+        for (i in 5..7) {
+            val startColumn =
+                if (i % 2 == 0) 1 else 0
+            for (j in startColumn..7 step 2) {
+                Assert.assertEquals(Color.BLACK, checkersBoard.getPieceByPosition(Position(i, j))?.color)
+                Assert.assertEquals(PieceType.PAWN, checkersBoard.getPieceByPosition(Position(i, j))?.type)
+            }
+        }
     }
+
 }
+

@@ -12,7 +12,7 @@ class CheckersTurnManager(private val color: Color) : TurnValidator {
         return color
     }
 
-    override fun nextTurn(): TurnValidator {
+    override fun nextTurn(gameState: IGameState): TurnValidator {
        return if (color == Color.WHITE) CheckersTurnManager(Color.BLACK) else CheckersTurnManager(Color.WHITE)
     }
 
