@@ -2,8 +2,8 @@ package edu.austral.dissis.client
 
 import com.fasterxml.jackson.core.type.TypeReference
 import edu.austral.dissis.chess.gui.GameView
-import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.client.listener.*
+import edu.austral.dissis.common.movement.Movement
 import edu.austral.dissis.server.payload.GameStatePayload
 import edu.austral.dissis.server.payload.InitializePayload
 import edu.austral.ingsis.clientserver.Client
@@ -15,6 +15,8 @@ class GameClient {
 
     private lateinit var client: Client
 
+    //manda al servidor el mensaje de tipo initialize para que le pase el estado actual del juego
+    // y el cliente lo pueda mostrar en la UI.
     fun start(root: GameView){
         client = buildClient(root)
         client.connect()
