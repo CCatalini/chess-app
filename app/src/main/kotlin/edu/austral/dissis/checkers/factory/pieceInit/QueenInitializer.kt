@@ -2,7 +2,7 @@ package edu.austral.dissis.checkers.factory.pieceInit
 
 import edu.austral.dissis.checkers.factory.diagonalCapture
 import edu.austral.dissis.checkers.factory.simpleDiagonalMove
-import edu.austral.dissis.chess.factory.PieceInitializer
+import edu.austral.dissis.common.piece.PieceInitializer
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType

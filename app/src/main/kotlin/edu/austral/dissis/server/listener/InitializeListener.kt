@@ -1,6 +1,6 @@
 package edu.austral.dissis.server.listener
 
-import edu.austral.dissis.common.adapter.Adapter
+import edu.austral.dissis.adapter.Adapter
 import edu.austral.dissis.server.gameServer.GameServer
 import edu.austral.dissis.server.payload.InitializePayload
 import edu.austral.ingsis.clientserver.ServerConnectionListener

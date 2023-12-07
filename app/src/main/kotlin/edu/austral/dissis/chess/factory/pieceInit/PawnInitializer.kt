@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.factory.pieceInit
 
-import edu.austral.dissis.chess.factory.PieceInitializer
+import edu.austral.dissis.common.piece.PieceInitializer
 import edu.austral.dissis.chess.factory.straightMove
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece

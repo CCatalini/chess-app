@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.factory.pieceInit
 
-import edu.austral.dissis.chess.factory.PieceInitializer
+import edu.austral.dissis.common.piece.PieceInitializer
 import edu.austral.dissis.chess.factory.destinationPosition
 import edu.austral.dissis.chess.validator.move.LongCastleValidator
 import edu.austral.dissis.chess.validator.move.ShortCastleValidator

@@ -9,8 +9,10 @@ import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
+import edu.austral.dissis.common.validator.postCondition.PostConditionResult
+import edu.austral.dissis.common.validator.postCondition.PostConditionValidator
 
-class CastleLeftPostCondition : PostConditionValidator{
+class CastleLeftPostCondition : PostConditionValidator {
 
     private val longCastleValidator: Validator = LongCastleValidator()
     override fun validate(gameState: IGameState, updatedBoard: IBoard): PostConditionResult {
