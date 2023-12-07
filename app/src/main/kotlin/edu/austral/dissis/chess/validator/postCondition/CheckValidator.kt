@@ -1,10 +1,10 @@
 package edu.austral.dissis.chess.validator.postCondition
 
-import edu.austral.dissis.common.game.IGameState
-import edu.austral.dissis.common.board.IBoard
-import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.Color
+import edu.austral.dissis.common.board.IBoard
+import edu.austral.dissis.common.board.Position
+import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.ValidatorResponse
@@ -12,10 +12,7 @@ import edu.austral.dissis.common.validator.ValidatorResponse
 //para ver si mis piezas me dejan en check
 class CheckValidator {
 
-    /*
-    *
-    * Revisa si esta en check el rey del color que se le pasa
-    *
+    /* Revisa si esta en check el rey del color que se le pasa
     * */
     fun inCheck(gameState: IGameState, kingColor: Color): Boolean {
         val board = gameState.getCurrentBoard()
