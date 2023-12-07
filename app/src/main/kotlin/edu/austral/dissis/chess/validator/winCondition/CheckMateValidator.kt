@@ -1,13 +1,13 @@
 package edu.austral.dissis.chess.validator.winCondition
 
-import edu.austral.dissis.common.game.GameState
+import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.chess.validator.postCondition.CheckValidator
+import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
+import edu.austral.dissis.common.game.GameState
 import edu.austral.dissis.common.game.IGameState
-import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.piece.Piece
-import edu.austral.dissis.chess.validator.postCondition.CheckValidator
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.ValidatorResponse
 import edu.austral.dissis.common.validator.WinCondition
@@ -15,7 +15,7 @@ import edu.austral.dissis.common.validator.WinCondition
 class CheckMateValidator : WinCondition {
     //nota tengo que crear un game state auxiliar cuando llamo a este con el tablero actualizado del movimiento
     override fun isWin(gameState: IGameState): Boolean {
-        val kingColor = gameState.getTurnManager().nextTurn().getTurn() //el color del rey es el del próximo turno, que seria el enemigo
+        val kingColor = gameState.getTurnManager().nextTurn(gameState).getTurn() //el color del rey es el del próximo turno, que seria el enemigo
         val board = gameState.getCurrentBoard()
         val positionsOfAlliedKingPieces = getPositionsByColor(board, kingColor)
         val possibleMoves = getPossibleMoves(positionsOfAlliedKingPieces, gameState)

@@ -2,7 +2,7 @@ package edu.austral.dissis
 
 const val ROWS = 8
 const val COLUMNS = 8
-val GAME_TYPE = GameType.CHESS
+val GAME_TYPE = GameType.CHECKERS
 
 
 enum class GameType {

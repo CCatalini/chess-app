@@ -6,7 +6,6 @@ import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.common.TurnValidator
 import edu.austral.dissis.common.board.IBoard
-import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
 import edu.austral.dissis.common.validator.WinCondition
@@ -46,10 +45,6 @@ data class GameState(private val boards : List<IBoard>,
 
         //valida las winConditions
         if (getWinCondition().isWin(gamePostConditions))  return finishedGame(gamePostConditions)
-
-        //incrementa el contador de movimientos de la pieza una vez que se validaron todas las condiciones
-        val piece : Piece = this.getCurrentBoard().getPieceByPosition(movement.from)!!
-        piece.incrementMoveCounter()
 
         return GameState(gamePostConditions.getBoards(),
             this.getWinCondition(),

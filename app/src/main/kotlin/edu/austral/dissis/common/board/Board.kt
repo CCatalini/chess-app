@@ -36,7 +36,10 @@ class Board(private val width: Int,
     override fun update(movement: Movement): IBoard {
         val newPiecePositions = piecePositions.toMutableMap()
         newPiecePositions.remove(movement.from)
-        newPiecePositions[movement.to] = piecePositions[movement.from]!!
+
+        val piece : Piece = piecePositions[movement.from]!!.incrementMoveCounter()
+        newPiecePositions[movement.to] = piece
+
         return Board(width, height, newPiecePositions)
     }
 
