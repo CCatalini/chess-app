@@ -4,17 +4,17 @@ import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.postCondition.PostConditionResult
 import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
 import edu.austral.dissis.common.Color
-import edu.austral.dissis.common.TurnValidator
+import edu.austral.dissis.common.validator.TurnValidator
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.validator.Validator
 import edu.austral.dissis.common.validator.ValidatorResponse
-import edu.austral.dissis.common.validator.WinCondition
+import edu.austral.dissis.common.validator.winCondition.WinCondition
 
 data class GameState(private val boards : List<IBoard>,
-                private val winCondition: WinCondition,
-                private val turnManager: TurnValidator,
-                private val preConditions: List<Validator>,
-                private val postConditions: List<PostConditionValidator>) : IGameState {
+                     private val winCondition: WinCondition,
+                     private val turnManager: TurnValidator,
+                     private val preConditions: List<Validator>,
+                     private val postConditions: List<PostConditionValidator>) : IGameState {
 
     override fun getBoards(): List<IBoard> {
         return boards

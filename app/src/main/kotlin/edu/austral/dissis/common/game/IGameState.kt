@@ -4,9 +4,9 @@ import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.Color
 import edu.austral.dissis.chess.validator.postCondition.PostConditionValidator
-import edu.austral.dissis.common.TurnValidator
+import edu.austral.dissis.common.validator.TurnValidator
 import edu.austral.dissis.common.validator.Validator
-import edu.austral.dissis.common.validator.WinCondition
+import edu.austral.dissis.common.validator.winCondition.WinCondition
 
 //guarda una lista de tableros que registra todos los movimientos realizados a lo largo del juego
 /*

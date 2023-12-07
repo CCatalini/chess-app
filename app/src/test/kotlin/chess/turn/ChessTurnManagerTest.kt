@@ -1,12 +1,12 @@
 package chess.turn
 
 import edu.austral.dissis.chess.factory.createChessNormalGame
-import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.chess.validator.turn.ChessTurnValidator
 import edu.austral.dissis.common.Color
-import edu.austral.dissis.common.TurnValidator
 import edu.austral.dissis.common.board.Position
+import edu.austral.dissis.common.game.IGameState
+import edu.austral.dissis.common.validator.TurnValidator
 import edu.austral.dissis.common.validator.ValidatorResponse
 import org.junit.jupiter.api.Test
 
@@ -22,13 +22,13 @@ class ChessTurnManagerTest {
 
     @Test
     fun `change turn`() {
-        val newTurnManager = turnManager.nextTurn()
+        val newTurnManager = turnManager.nextTurn(gameState)
         assert(newTurnManager.getTurn() == Color.BLACK)
     }
 
     @Test
     fun `change turn twice`() {
-        val newTurnManager = turnManager.nextTurn().nextTurn()
+        val newTurnManager = turnManager.nextTurn(gameState).nextTurn(gameState)
         assert(newTurnManager.getTurn() == Color.WHITE)
     }
 

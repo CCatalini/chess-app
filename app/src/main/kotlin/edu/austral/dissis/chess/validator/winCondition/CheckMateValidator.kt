@@ -10,7 +10,7 @@ import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.Piece
 import edu.austral.dissis.common.piece.PieceType
 import edu.austral.dissis.common.validator.ValidatorResponse
-import edu.austral.dissis.common.validator.WinCondition
+import edu.austral.dissis.common.validator.winCondition.WinCondition
 
 class CheckMateValidator : WinCondition {
     //nota tengo que crear un game state auxiliar cuando llamo a este con el tablero actualizado del movimiento

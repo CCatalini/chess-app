@@ -2,11 +2,11 @@ package edu.austral.dissis.checkers.validator.turn
 
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.Color
-import edu.austral.dissis.common.TurnValidator
 import edu.austral.dissis.common.board.IBoard
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.piece.Piece
+import edu.austral.dissis.common.validator.TurnValidator
 import edu.austral.dissis.common.validator.ValidatorResponse
 
 class CheckersTurnManager(private val color: Color, private val posibleMoves: List<Movement>) : TurnValidator {
@@ -15,11 +15,23 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
     }
 
     override fun nextTurn(gameState: IGameState): TurnValidator {
-       return if (canCapture(gameState)) {
-           nextTurnWithCapture(gameState)
-       } else {
-           nextTurnWithoutCapture()
-       }
+        return if (canCapture(gameState) && hasEatenMove(gameState)) {
+            nextTurnWithCapture(gameState)
+        } else {
+            nextTurnWithoutCapture()
+        }
+    }
+
+    private fun hasEatenMove(gameState: IGameState): Boolean {
+        val board = gameState.getCurrentBoard()
+        if (gameState.getBoards().size < 2) { //porque mínimo tuvo que haber movido 2 veces
+            return false
+        }
+        val previousBoard = gameState.getBoards()[gameState.getBoards().size - 2]
+        val movement = getLatestMovement(previousBoard, board)
+        val previousPiece = previousBoard.getPieceByPosition(movement.from) ?: return false
+        val previousColor = previousPiece.color
+        return previousBoard.getOccupiedPositions().size > board.getOccupiedPositions().size && previousColor == color
     }
 
     private fun nextTurnWithCapture(gameState: IGameState): TurnValidator {
@@ -48,8 +60,9 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         }
         val previousBoard = gameState.getBoards()[gameState.getBoards().size - 2]
         val movement = getLatestMovement(previousBoard, board)
-        val pieceColor = board.getPieceByPosition(movement.to)?.color
-        val posibleEatenMoves = getPosibleEatenMoves(pieceColor!!, gameState)
+        val piece = board.getPieceByPosition(movement.to) ?: return false
+        val pieceColor = piece.color
+        val posibleEatenMoves = getPosibleEatenMoves(pieceColor, gameState)
 
         return posibleEatenMoves.isNotEmpty()
 
@@ -59,7 +72,7 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         val pieceToMove: Piece? = getPiece(movement, gameState)
 
         if (posibleMoves.isNotEmpty() && !posibleMoves.contains(movement)) {
-            return ValidatorResponse.ValidatorResultInvalid("tenes que mover una pieza que pueda comer" )
+            return ValidatorResponse.ValidatorResultInvalid("Sigue siendo tu turno capito, tenes que comer" )
         }
         if (pieceToMove != null) {
             if (pieceToMove.color == this.color) {
@@ -90,7 +103,7 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         val positionsPiecesByColor = board.getOccupiedPositions().filter { board.getPieceByPosition(it)?.color == pieceColor }
         val posibleEatenMoves = mutableListOf<Movement>()
         for (position in positionsPiecesByColor) {
-            val posibleMoves = getPosibleMovesByPosition (position)
+            val posibleMoves = getPosibleMovesByPosition (position, gameState)
             for (move in posibleMoves) {
                 if (isEatingMovement(move, gameState )) {
                     posibleEatenMoves.add(move)
@@ -107,12 +120,13 @@ class CheckersTurnManager(private val color: Color, private val posibleMoves: Li
         return piece.validateMove(move, gameState) is ValidatorResponse.ValidatorResultValid
     }
 
-    private fun getPosibleMovesByPosition (position: Position ): List<Movement> {
+    private fun getPosibleMovesByPosition (position: Position, gameState: IGameState ): List<Movement> {
         val posibleMoves = mutableListOf<Movement>()
         val row = position.row
         val column = position.column
         val posiblePositions = listOf(Position(row + 2, column + 2), Position(row + 2, column - 2), Position(row - 2, column + 2), Position(row - 2, column - 2))
-        for (posiblePosition in posiblePositions) {
+        val validatedPossiblePositions = posiblePositions.filter { it.row in 0..7 && it.column in 0..7 }
+        for (posiblePosition in validatedPossiblePositions) {
             posibleMoves.add(Movement(position, posiblePosition))
         }
         return posibleMoves

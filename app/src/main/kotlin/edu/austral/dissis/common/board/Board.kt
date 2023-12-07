@@ -22,7 +22,7 @@ class Board(private val width: Int,
 
     override fun getPositionByPiece(piece: Piece): Position? {
         for (position in piecePositions.keys) {
-            if (piecePositions[position] == piece) {
+            if (piecePositions[position]?.id == piece.id) {
                 return position
             }
         }
@@ -35,10 +35,10 @@ class Board(private val width: Int,
 
     override fun update(movement: Movement): IBoard {
         val newPiecePositions = piecePositions.toMutableMap()
-        newPiecePositions.remove(movement.from)
+        val piece = piecePositions[movement.from]!!
 
-        val piece : Piece = piecePositions[movement.from]!!.incrementMoveCounter()
-        newPiecePositions[movement.to] = piece
+        newPiecePositions.remove(movement.from)
+        newPiecePositions[movement.to] = piece.incrementMoveCounter()
 
         return Board(width, height, newPiecePositions)
     }
