@@ -1,11 +1,11 @@
 package chess.move
 
-import edu.austral.dissis.chess.factory.createBishopTestGame
+import chess.game.createBishopTestGame
+import edu.austral.dissis.chess.movement.Movement
+import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.game.FinishGameState
 import edu.austral.dissis.common.game.IGameState
 import edu.austral.dissis.common.game.InvalidMoveGameState
-import edu.austral.dissis.chess.movement.Movement
-import edu.austral.dissis.common.board.Position
 import org.junit.jupiter.api.Test
 
 class BishopMoveTest {

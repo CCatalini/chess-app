@@ -1,6 +1,6 @@
 package chess.move
 
-import edu.austral.dissis.chess.factory.createKnightTestGame
+import chess.game.createKnightTestGame
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.board.Position
 import edu.austral.dissis.common.game.FinishGameState

@@ -38,10 +38,10 @@ import edu.austral.dissis.common.piece.Piece
 
 
 
-private fun getWidth( minSize: Int): Int {
-    return if(ROWS < minSize) minSize else ROWS
-}
+    private fun getWidth( minSize: Int): Int {
+        return if(ROWS < minSize) minSize else ROWS
+    }
 
-private fun getHeight(minSize: Int): Int {
-    return if (COLUMNS < minSize) minSize else COLUMNS
-}
+    private fun getHeight(minSize: Int): Int {
+        return if (COLUMNS < minSize) minSize else COLUMNS
+    }

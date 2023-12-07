@@ -1,9 +1,9 @@
 package chess.move
 
-import edu.austral.dissis.chess.factory.createKingTestGame
-import edu.austral.dissis.common.game.IGameState
+import chess.game.createKingTestGame
 import edu.austral.dissis.chess.movement.Movement
 import edu.austral.dissis.common.board.Position
+import edu.austral.dissis.common.game.IGameState
 import org.junit.jupiter.api.Test
 
 class KingMoveTest {

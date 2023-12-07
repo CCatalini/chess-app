@@ -19,7 +19,7 @@ class BoardTest {
         val updatedBoard = initialBoard.update(movement)
 
         Assert.assertNull(updatedBoard.getPieceByPosition(Position(0, 0)))
-        Assert.assertEquals(PieceType.ChessPieceType.ROOK, updatedBoard.getPieceByPosition(Position(1, 1))?.type)
+        Assert.assertEquals(PieceType.ROOK, updatedBoard.getPieceByPosition(Position(1, 1))?.type)
     }
 
 
@@ -30,7 +30,7 @@ class BoardTest {
         val updatedBoard = initialBoard.update(movement)
 
         Assert.assertNull(updatedBoard.getPieceByPosition(Position(1, 1)))
-        Assert.assertEquals(PieceType.ChessPieceType.PAWN, updatedBoard.getPieceByPosition(Position(2, 1))?.type)
+        Assert.assertEquals(PieceType.PAWN, updatedBoard.getPieceByPosition(Position(2, 1))?.type)
     }
 
 }

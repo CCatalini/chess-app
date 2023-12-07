@@ -1,4 +1,4 @@
-package chess.validator
+package common.validator
 
 import edu.austral.dissis.chess.factory.pieceInit.KnightInitializer
 import edu.austral.dissis.chess.factory.pieceInit.RookInitializer
